@@ -1032,6 +1032,10 @@
         let activeCat = 'all';
         let currentList = [...allCars];
 
+        function onImgError(el) {
+            el.src = 'public/cars/placeholder.jpg';
+        }
+
         function checkUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
             const brand = urlParams.get('brand');
@@ -1042,6 +1046,8 @@
             } else if (cat) {
                 activeCat = cat;
                 updateTabUI(cat);
+            } else {
+                updateTabUI('all');
             }
         }
 
@@ -1049,7 +1055,10 @@
             document.querySelectorAll('#catalog-filter-tabs .cat-btn').forEach(b => {
                 b.classList.remove('bg-slate-900', 'text-white', 'shadow-sm', 'active');
                 b.classList.add('bg-slate-100', 'text-slate-700');
-                if (b.innerText.toLowerCase().includes(category.toLowerCase())) {
+                if (category === 'all' && b.innerText.toLowerCase().includes('semua')) {
+                    b.classList.remove('bg-slate-100', 'text-slate-700');
+                    b.classList.add('bg-slate-900', 'text-white', 'shadow-sm', 'active');
+                } else if (category !== 'all' && b.innerText.toLowerCase().includes(category.toLowerCase())) {
                     b.classList.remove('bg-slate-100', 'text-slate-700');
                     b.classList.add('bg-slate-900', 'text-white', 'shadow-sm', 'active');
                 }
@@ -1084,7 +1093,7 @@
 
                 return '<div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">'
                     + '<div class="relative bg-slate-900 aspect-[16/10] overflow-hidden">'
-                    + '<a href="' + detailLink + '"><img src="' + cover + '" alt="' + car.model + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='public/cars/placeholder.jpg'"></a>'
+                    + '<a href="' + detailLink + '"><img src="' + cover + '" alt="' + car.model + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="onImgError(this)"></a>'
                     + '<div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">'
                     + '<span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: ' + car.stock_no + '</span>'
                     + '<span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">' + car.status + '</span>'
