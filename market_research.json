@@ -1,0 +1,322 @@
+{
+  "AM_495_WBA7L120807M12521": {
+    "stock_no": "AM 495",
+    "chassis": "WBA7L120807M12521",
+    "model": "BMW M135i XDRIVE",
+    "market_low": 210000,
+    "market_median": 217000,
+    "market_high": 223000,
+    "market_sample_size": 6,
+    "market_checked_at": "2026-08-18",
+    "market_sources": "Carlist.my",
+    "market_notes": "Hatchback xDrive prestasi tinggi, harga kompetitif.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "DC_604_WBA22GE0307R40365": {
+    "stock_no": "DC 604",
+    "chassis": "WBA22GE0307R40365",
+    "model": "BMW M135 XDRIVE",
+    "market_low": 265000,
+    "market_median": 272000,
+    "market_high": 278000,
+    "market_sample_size": 6,
+    "market_checked_at": "2026-08-18",
+    "market_sources": "Carlist.my",
+    "market_notes": "Hatchback xDrive prestasi tinggi, harga kompetitif.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2109_WBA7K320X07J12302": {
+    "stock_no": "SA 2109",
+    "chassis": "WBA7K320X07J12302",
+    "model": "BMW 118I M SPORT",
+    "market_low": 141000,
+    "market_median": 147000,
+    "market_high": 153000,
+    "market_sample_size": 4,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist",
+    "market_notes": "Stok standard recond.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "BM_2267_WBS42AZ060CP51079": {
+    "stock_no": "BM 2267",
+    "chassis": "WBS42AZ060CP51079",
+    "model": "BMW M4 COMPETITION M X DRIVE (AT)",
+    "market_low": 498000,
+    "market_median": 520000,
+    "market_high": 540000,
+    "market_sample_size": 5,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "Tahun 2022 M xDrive spec tinggi. Permintaan enthusiast kukuh.",
+    "demand_score": 9.2,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "BMZ_191_LA650S-0264019": {
+    "stock_no": "BMZ 191",
+    "chassis": "LA650S-0264019",
+    "model": "DAIHATSU TANTO FUN CROSS TURBO",
+    "market_low": 100000,
+    "market_median": 105000,
+    "market_high": 109000,
+    "market_sample_size": 5,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my",
+    "market_notes": "Fun Cross Turbo unit comel & jimat minyak.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "EW_517_ZFF97CMC000293344": {
+    "stock_no": "EW 517",
+    "chassis": "ZFF97CMC000293344",
+    "model": "FERRARI 812 GTS",
+    "market_low": 2380000,
+    "market_median": 2450000,
+    "market_high": 2550000,
+    "market_sample_size": 3,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Carlist, Facebook Marketplace",
+    "market_notes": "Unit supercar sangat rare. Margin pasaran sangat tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "PSZ_546_FL5-1002672": {
+    "stock_no": "PSZ 546",
+    "chassis": "FL5-1002672",
+    "model": "HONDA CIVIC TYPE R (FL5)",
+    "market_low": 315000,
+    "market_median": 328000,
+    "market_high": 338000,
+    "market_sample_size": 8,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Facebook Type R Club, Carlist",
+    "market_notes": "Model panas pasaran Malaysia. Nilai susut minima.",
+    "demand_score": 9.2,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2115_FL5-1102715": {
+    "stock_no": "SA 2115",
+    "chassis": "FL5-1102715",
+    "model": "HONDA CIVIC TYPE R (FL5)",
+    "market_low": 315000,
+    "market_median": 328000,
+    "market_high": 338000,
+    "market_sample_size": 8,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Facebook Type R Club, Carlist",
+    "market_notes": "Model panas pasaran Malaysia. Nilai susut minima.",
+    "demand_score": 9.2,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "BM_2400_FL5-1104713": {
+    "stock_no": "BM 2400",
+    "chassis": "FL5-1104713",
+    "model": "HONDA CIVIC TYPE R (FL5)",
+    "market_low": 315000,
+    "market_median": 328000,
+    "market_high": 338000,
+    "market_sample_size": 8,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Facebook Type R Club, Carlist",
+    "market_notes": "Model panas pasaran Malaysia. Nilai susut minima.",
+    "demand_score": 9.2,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2016_FL5-1206161": {
+    "stock_no": "SA 2016",
+    "chassis": "FL5-1206161",
+    "model": "HONDA CIVIC TYPE R RACING BLACK PCKG (FL5)",
+    "market_low": 315000,
+    "market_median": 328000,
+    "market_high": 338000,
+    "market_sample_size": 8,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Facebook Type R Club, Carlist",
+    "market_notes": "Model panas pasaran Malaysia. Nilai susut minima.",
+    "demand_score": 9.2,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2155_FL1-1002231": {
+    "stock_no": "SA 2155",
+    "chassis": "FL1-1002231",
+    "model": "HONDA CIVIC EX (FL1)",
+    "market_low": 142000,
+    "market_median": 148000,
+    "market_high": 154000,
+    "market_sample_size": 4,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist",
+    "market_notes": "Stok standard recond.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "EW_519_JF5-2002068": {
+    "stock_no": "EW 519",
+    "chassis": "JF5-2002068",
+    "model": "HONDA NBOX CUSTOM TURBO",
+    "market_low": 112000,
+    "market_median": 118000,
+    "market_high": 122000,
+    "market_sample_size": 12,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Carlist",
+    "market_notes": "Kei-car turbo paling popular untuk keluarga bandar.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2116_JF3-2339422": {
+    "stock_no": "SA 2116",
+    "chassis": "JF3-2339422",
+    "model": "HONDA NBOX CUSTOM L TURBO COORDINATE STYLE",
+    "market_low": 102000,
+    "market_median": 108000,
+    "market_high": 112000,
+    "market_sample_size": 12,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Carlist",
+    "market_notes": "Kei-car turbo paling popular untuk keluarga bandar.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2008_JF5-2030250": {
+    "stock_no": "SA 2008",
+    "chassis": "JF5-2030250",
+    "model": "HONDA NBOX CUSTOM TURBO COORDINATE STYLE MONOTONE",
+    "market_low": 117000,
+    "market_median": 123000,
+    "market_high": 127000,
+    "market_sample_size": 12,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Mudah.my, Carlist",
+    "market_notes": "Kei-car turbo paling popular untuk keluarga bandar.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2119_RC1-1404441": {
+    "stock_no": "SA 2119",
+    "chassis": "RC1-1404441",
+    "model": "HONDA ODYSSEY 2.4 ABSOLUTE EX (7 SEATER)",
+    "market_low": 169000,
+    "market_median": 174000,
+    "market_high": 179000,
+    "market_sample_size": 7,
+    "market_checked_at": "2026-08-08",
+    "market_sources": "Mudah.my",
+    "market_notes": "Absolute EX spec penuh, survey perlu dikemas kini (stale).",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2161_RP3-1337281": {
+    "stock_no": "SA 2161",
+    "chassis": "RP3-1337281",
+    "model": "HONDA STEPWAGON 1.5 SPADA COOL SPIRIT HONDA SENSING (7 SEATER)",
+    "market_low": 164000,
+    "market_median": 170000,
+    "market_high": 175000,
+    "market_sample_size": 10,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "WN_99_RP3-1328380": {
+    "stock_no": "WN 99",
+    "chassis": "RP3-1328380",
+    "model": "HONDA STEPWAGON 1.5 SPADA COOL SPIRIT HONDA SENSING (7 SEATER)",
+    "market_low": 159000,
+    "market_median": 165000,
+    "market_high": 170000,
+    "market_sample_size": 10,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "PSZ_585_RP3-1333523": {
+    "stock_no": "PSZ 585",
+    "chassis": "RP3-1333523",
+    "model": "HONDA STEPWAGON 1.5 SPADA COOL SPIRIT HONDA SENSING (7 SEATER)",
+    "market_low": 160000,
+    "market_median": 166000,
+    "market_high": 171000,
+    "market_sample_size": 10,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "SA_2164_RP6-1113318": {
+    "stock_no": "SA 2164",
+    "chassis": "RP6-1113318",
+    "model": "HONDA STEPWAGON SPADA (7 SEATER)",
+    "market_low": 172000,
+    "market_median": 178000,
+    "market_high": 183000,
+    "market_sample_size": 10,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  },
+  "DD_235_RP6-1111802": {
+    "stock_no": "DD 235",
+    "chassis": "RP6-1111802",
+    "model": "HONDA STEPWAGON 1.5 SPADA (7 SEATER)",
+    "market_low": 169000,
+    "market_median": 175000,
+    "market_high": 180000,
+    "market_sample_size": 10,
+    "market_checked_at": "2026-08-26",
+    "market_sources": "Carlist, Mudah.my",
+    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
+    "demand_score": 8.5,
+    "manual_overrides": {
+      "is_override": false
+    }
+  }
+}

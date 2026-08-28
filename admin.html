@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Pricing & Inventory Intelligence | Prestige Auto Recond</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: { gold: '#D4AF37', goldLight: '#F3E5AB', emerald: '#0F5132', emeraldHover: '#0b3d26', charcoal: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex flex-col min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span class="font-display text-base sm:text-lg font-bold text-white tracking-wider uppercase">PRESTIGE AUTO</span>
+                        <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold uppercase tracking-widest">Admin Pricing Engine v2.0</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-medium truncate">Sistem Kawalan Margin & Risikan Pasaran</span>
+                </a>
+            </div>
+            <nav class="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                <button onclick="switchTab('top-ads', this)" class="admin-tab-btn px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-extrabold shadow-sm transition-all">Top Iklan Ads</button>
+                <button onclick="switchTab('inventory', this)" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition-all">Senarai Stok & Margin</button>
+                <button onclick="switchTab('settings', this)" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition-all">Tetapan OTR & Komisen</button>
+                <button onclick="switchTab('import-export', this)" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition-all">Import / Export CSV</button>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="katalog.html" target="_blank" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold uppercase tracking-wider border border-slate-700 transition-all flex items-center gap-1.5">
+                    <span>Lihat Web Awam</span>
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
+        </div>
+        <div class="md:hidden flex items-center gap-1 px-4 py-2 bg-slate-900 border-t border-slate-800 overflow-x-auto no-scrollbar text-[11px] font-bold uppercase">
+            <button onclick="switchTab('top-ads', this)" class="admin-tab-btn px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-extrabold flex-shrink-0">Top Iklan Ads</button>
+            <button onclick="switchTab('inventory', this)" class="admin-tab-btn px-3 py-1.5 rounded-lg text-slate-300 bg-slate-800 flex-shrink-0">Stok & Margin</button>
+            <button onclick="switchTab('settings', this)" class="admin-tab-btn px-3 py-1.5 rounded-lg text-slate-300 bg-slate-800 flex-shrink-0">Tetapan</button>
+            <button onclick="switchTab('import-export', this)" class="admin-tab-btn px-3 py-1.5 rounded-lg text-slate-300 bg-slate-800 flex-shrink-0">CSV Data</button>
+        </div>
+    </header>
+
+    <div class="bg-slate-900/60 border-b border-slate-800 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Stok PDF</span>
+                <div class="flex items-baseline justify-between mt-2">
+                    <span id="stat-total-cars" class="text-2xl font-bold font-display text-white">0</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Unit</span>
+                </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Risikan Segar (<=7h)</span>
+                <div class="flex items-baseline justify-between mt-2">
+                    <span id="stat-fresh-cars" class="text-2xl font-bold font-display text-emerald-400">0</span>
+                    <span class="text-[10px] text-emerald-500/80 font-mono">Aktif</span>
+                </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400">Top Ads Recommendation</span>
+                <div class="flex items-baseline justify-between mt-2">
+                    <span id="stat-top-ads-count" class="text-2xl font-bold font-display text-amber-400">0</span>
+                    <span class="text-[10px] text-amber-500/80 font-mono">Ad Score >= 8.5</span>
+                </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400">Perlu Risikan Pasaran</span>
+                <div class="flex items-baseline justify-between mt-2">
+                    <span id="stat-unresearched" class="text-2xl font-bold font-display text-rose-400">0</span>
+                    <span class="text-[10px] text-rose-500/80 font-mono">Belum Diselidik</span>
+                </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between col-span-2 sm:col-span-2 lg:col-span-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Potensi Spread Pasaran</span>
+                <div class="flex items-baseline justify-between mt-2">
+                    <span id="stat-total-spread" class="text-xl font-bold font-display text-amber-300 truncate">RM 0</span>
+                    <span class="text-[10px] text-amber-500/80 font-mono">Total</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section id="tab-top-ads" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Meta & TikTok Ads Ready</span>
+                        <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-mono text-[10px] font-extrabold">Algoritma Ad Score</span>
+                    </div>
+                    <h1 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Top Stok Untuk Dijalankan Iklan Berbayar</h1>
+                    <p class="text-xs sm:text-sm text-slate-400">Disusun mengikut margin untung (market spread), permintaan model (demand score), dan kelebihan harga OTR berbanding median pasaran semasa.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select id="top-ads-brand-filter" onchange="renderTopAds()" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-400">
+                        <option value="all">Semua Jenama</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Bmw">BMW</option>
+                        <option value="Ferrari">Ferrari</option>
+                        <option value="Daihatsu">Daihatsu</option>
+                    </select>
+                </div>
+            </div>
+            <div id="top-ads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="tab-inventory" class="hidden space-y-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-display text-2xl font-bold text-white">Senarai Penuh Stok & Risikan Margin</h2>
+                    <p class="text-xs text-slate-400">Paparan data komersial dalaman (Dealer Body Price, Est OTR, Market Spread, Cadangan Komisen & Skor Iklan).</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="exportCSV()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1.5">
+                        <span>Eksport CSV</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="relative">
+                        <input type="text" id="inv-search" onkeyup="filterInventoryTable()" placeholder="Cari Model, Stock No, Casis..." class="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
+                        <span class="absolute left-3 top-2.5 text-slate-500 text-xs">🔍</span>
+                    </div>
+                    <select id="inv-filter-brand" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+                        <option value="all">Semua Jenama</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Bmw">BMW</option>
+                        <option value="Ferrari">Ferrari</option>
+                        <option value="Daihatsu">Daihatsu</option>
+                    </select>
+                    <select id="inv-filter-status" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+                        <option value="all">Semua Status Risikan</option>
+                        <option value="HIGH_PRIORITY">High Priority (Ad Score >= 9.0)</option>
+                        <option value="GOOD_DEAL">Good Deal (Spread >= RM3k)</option>
+                        <option value="LOW_MARGIN">Low Margin (< RM2k)</option>
+                        <option value="UNRESEARCHED">Belum Diselidik (Unresearched)</option>
+                    </select>
+                    <select id="inv-filter-freshness" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+                        <option value="all">Semua Kesegaran Data</option>
+                        <option value="FRESH">Segar (<= 7 Hari)</option>
+                        <option value="MODERATE">Sederhana (8-14 Hari)</option>
+                        <option value="STALE">Lapuk / Perlu Semak (> 14 Hari)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 font-bold border-b border-slate-800 uppercase tracking-wider text-[10px]">
+                                <th class="p-3.5">Stok / Model</th>
+                                <th class="p-3.5">Body Price</th>
+                                <th class="p-3.5">Est. OTR (55% / 0%)</th>
+                                <th class="p-3.5">Harga Median Pasaran</th>
+                                <th class="p-3.5">Market Spread</th>
+                                <th class="p-3.5">Cadangan Komisen</th>
+                                <th class="p-3.5">Harga Iklan (NCD 55%)</th>
+                                <th class="p-3.5">Skor Iklan</th>
+                                <th class="p-3.5">Kesegaran</th>
+                                <th class="p-3.5 text-right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body" class="divide-y divide-slate-800/80 font-mono text-slate-200"></tbody>
+                    </table>
+                </div>
+                <div class="p-4 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+                    <span id="inv-table-info">Menunjukkan 0 rekod</span>
+                    <div class="flex items-center gap-1" id="inv-table-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-settings" class="hidden space-y-6">
+            <div class="max-w-3xl space-y-2">
+                <h2 class="font-display text-2xl font-bold text-white">Tetapan Global Engine Penetapan Harga</h2>
+                <p class="text-xs text-slate-400">Ubah formula kos OTR, buffer tawar-menawar, dan peraturan komisen tanpa perlu mengubah kod sumber.</p>
+            </div>
+            <div class="max-w-3xl bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <div class="space-y-4">
+                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">1. Kos Anggaran OTR Default (Insurans + Cukai Jalan + Pendaftaran)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                        <div>
+                            <label class="block font-bold text-slate-300 mb-1.5">Tambahan OTR (55% NCD):</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
+                                <input type="number" id="setting-otr-55" value="7000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                            </div>
+                            <span class="text-[10px] text-slate-500 mt-1 block">Default: RM 7,000</span>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-300 mb-1.5">Tambahan OTR (0% NCD):</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
+                                <input type="number" id="setting-otr-0" value="10000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                            </div>
+                            <span class="text-[10px] text-slate-500 mt-1 block">Default: RM 10,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-800 space-y-4">
+                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">2. Buffer Tawar-Menawar (Negotiation Buffer)</h3>
+                    <div class="max-w-sm font-mono text-xs">
+                        <label class="block font-bold text-slate-300 mb-1.5">Default Buffer Diskaun:</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
+                            <input type="number" id="setting-buffer" value="1800" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-1 block">Buffer untuk jurujual bagi diskaun semasa closing tanpa makan komisen teras.</span>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-800 space-y-4">
+                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">3. Had Hari Kesegaran Data Risikan (Freshness Thresholds)</h3>
+                    <div class="grid grid-cols-2 gap-4 font-mono text-xs max-w-md">
+                        <div>
+                            <label class="block font-bold text-slate-300 mb-1">Hijau (Segar):</label>
+                            <input type="number" id="setting-fresh-days" value="7" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                            <span class="text-[10px] text-slate-500"><= 7 hari</span>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-300 mb-1">Kuning (Sederhana):</label>
+                            <input type="number" id="setting-mod-days" value="14" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                            <span class="text-[10px] text-slate-500">8 - 14 hari</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-800 flex items-center justify-between">
+                    <button onclick="resetDefaultSettings()" class="text-xs text-slate-400 hover:text-white underline">Kembalikan ke Default</button>
+                    <button onclick="saveGlobalSettings()" class="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md">
+                        Simpan Tetapan Engine
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-import-export" class="hidden space-y-6">
+            <div class="max-w-3xl space-y-2">
+                <h2 class="font-display text-2xl font-bold text-white">Import & Eksport Risikan Pasaran (CSV / Excel)</h2>
+                <p class="text-xs text-slate-400">Muat naik fail CSV untuk mengemas kini harga pasaran secara pukal.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+                <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+                    <h3 class="font-display text-base font-bold text-white">1. Muat Turun Data Semasa</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Eksport senarai stok semasa bersama maklumat penyelidikan pasaran ke dalam format fail CSV yang boleh dibuka di Microsoft Excel atau Google Sheets.</p>
+                    <button onclick="exportCSV()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider border border-slate-700 transition-all flex items-center justify-center gap-2">
+                        <span>Muat Turun CSV Semasa</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+            <div class="flex items-start justify-between">
+                <div>
+                    <span id="modal-stock-no" class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">STOCK: --</span>
+                    <h3 id="modal-car-title" class="font-display text-lg sm:text-xl font-bold text-white mt-0.5">Model Kenderaan</h3>
+                    <div id="modal-body-price-text" class="text-xs font-mono text-slate-400 mt-1">Body Price: RM 0</div>
+                </div>
+                <button onclick="closeEditModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center font-bold">✕</button>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-white block">Mod Pengiraan:</span>
+                    <span id="modal-override-label" class="text-[11px] text-emerald-400 font-medium">Auto Compute (Mengikut Formula Engine)</span>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="modal-override-checkbox" onchange="toggleModalOverride(this.checked)" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-400"></div>
+                </label>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+                <div>
+                    <label class="block text-slate-400 mb-1">Market Low (RM):</label>
+                    <input type="number" id="modal-market-low" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                </div>
+                <div>
+                    <label class="block text-amber-400 font-bold mb-1">Market Median (RM):</label>
+                    <input type="number" id="modal-market-median" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-amber-500/50 text-white font-bold focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">Market High (RM):</label>
+                    <input type="number" id="modal-market-high" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                <div>
+                    <label class="block text-slate-400 mb-1">Tarikh Semakan Pasaran:</label>
+                    <input type="date" id="modal-market-date" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">Sumber Semakan (cth: Mudah, Carlist):</label>
+                    <input type="text" id="modal-market-sources" placeholder="Mudah.my, Carlist" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white">
+                </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-xs">
+                <div class="flex justify-between items-center text-slate-400 border-b border-slate-800 pb-2">
+                    <span>Available Market Spread:</span>
+                    <span id="modal-spread-val" class="text-amber-300 font-bold">RM 0</span>
+                </div>
+                <div class="grid grid-cols-2 gap-4 pt-1">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Cadangan Komisen (RM):</label>
+                        <input type="number" id="modal-comm-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Buffer Tawar (RM):</label>
+                        <input type="number" id="modal-buffer-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/80">
+                    <div>
+                        <span class="block text-[11px] text-slate-400">Harga Iklan OTR (55% NCD):</span>
+                        <input type="number" id="modal-adv-ncd55-input" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-amber-400 font-bold text-sm mt-1">
+                    </div>
+                    <div>
+                        <span class="block text-[11px] text-slate-400">Min. Target Closing Price:</span>
+                        <input type="number" id="modal-min-sell-input" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-sm mt-1">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs text-slate-400 mb-1">Nota Pasaran / Catatan Khas:</label>
+                <textarea id="modal-notes" rows="2" placeholder="Cth: Unit spec tinggi, permintaan peminat kukuh, tiada tandingan harga." class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white"></textarea>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                <button onclick="resetModalToAuto()" type="button" class="text-xs text-slate-400 hover:text-white underline">Reset ke Pengiraan Auto</button>
+                <div class="flex gap-2">
+                    <button onclick="closeEditModal()" type="button" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">Batal</button>
+                    <button onclick="saveModalChanges()" type="button" class="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-lg">Simpan Risikan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

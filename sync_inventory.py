@@ -1,12 +1,13 @@
 ﻿#!/usr/bin/env python3
 """
-Sync Inventory Pipeline for Recond Car Salesman Website
-- Parses 'CAR PRICELIST.pdf'
-- Performs incremental comparison against 'cars_data.json'
-- Downloads photos for new cars (MY folder first, else JPN fallback)
-- Cleans up deleted/sold units
-- Updates 'cars_data.json' and 'index.html'
-- Optionally commits and pushes to GitHub for instant Cloudflare Pages auto-deploy
+Smarter Inventory & Pricing Sync Pipeline
+- Parses dealer 'CAR PRICELIST.pdf'
+- Performs incremental sync using stable composite key (stock_no + chassis)
+- Preserves market research & manual overrides
+- Runs centralized pricing engine to compute estimated OTR, market spread, commissions, and ad scores
+- Generates 'admin_inventory.json' (Admin/Internal full commercial data)
+- Generates 'cars_data.json' (Sanitized Public catalog with NO body price or margin leak)
+- Optionally commits & pushes to GitHub for Cloudflare auto-deploy
 """
 
 import os
@@ -18,10 +19,18 @@ import argparse
 import urllib.parse
 import subprocess
 import pdfplumber
-import requests
-import gdown
 
-# Configure UTF-8 for Windows console
+from pricing_engine import (
+    load_settings,
+    calculate_car_pricing,
+    sanitize_for_public,
+    get_unique_key,
+    SETTINGS_FILE,
+    MARKET_FILE,
+    ADMIN_INVENTORY_FILE,
+    PUBLIC_DATA_FILE
+)
+
 if sys.platform == "win32":
     try:
         sys.stdout.reconfigure(encoding='utf-8')
@@ -30,8 +39,6 @@ if sys.platform == "win32":
         pass
 
 PDF_FILENAME = "CAR PRICELIST.pdf"
-DATA_FILENAME = "cars_data.json"
-HTML_FILENAME = "index.html"
 CARS_DIR = os.path.join("public", "cars")
 
 def clean_text(val):
@@ -43,9 +50,14 @@ def sanitize_code(stock_no):
     s = clean_text(stock_no).replace("/", "_").replace("\\", "_")
     return re.sub(r'[^a-zA-Z0-9_-]', '_', s)
 
+def generate_seo_slug(brand, model, stock_no):
+    raw = f"{brand} {model} {stock_no}".lower()
+    slug = re.sub(r'[^a-z0-9]+', '-', raw).strip('-')
+    return slug
+
 def parse_price(price_str):
     if not price_str:
-        return 0, "Harga Bincang", "Bincang"
+        return 0, "Harga Bincang"
     price_clean = clean_text(price_str).upper()
     
     promo_match = re.search(r'RM\s*([\d\.]+)\s*[KM]?\s*@\s*RM\s*([\d\.]+)\s*([KM]?)', price_clean)
@@ -66,13 +78,9 @@ def parse_price(price_str):
                 num = int(val * 1000)
             disp = f"RM {num:,}"
         else:
-            return 0, price_str, "Bincang"
+            return 0, price_str
             
-    principal = num * 0.9
-    total_interest = principal * 0.025 * 9
-    monthly = int((principal + total_interest) / 108) if num > 0 else 0
-    monthly_disp = f"~RM {monthly:,} / bln" if monthly > 0 else "Bincang"
-    return num, disp, monthly_disp
+    return num, disp
 
 def extract_grade_and_mileage(spec_text):
     text = clean_text(spec_text)
@@ -95,7 +103,7 @@ def extract_grade_and_mileage(spec_text):
 
 def classify_category(model_str):
     m = model_str.upper()
-    if any(k in m for k in ['ALPHARD', 'VELLFIRE', 'NOAH', 'VOXY', 'STEPWAGON', 'ODYSSEY', 'TANTO', 'WELCAB']):
+    if any(k in m for k in ['ALPHARD', 'VELLFIRE', 'NOAH', 'VOXY', 'STEPWAGON', 'STEPWGN', 'ODYSSEY', 'TANTO', 'WELCAB']):
         return 'mpv'
     if any(k in m for k in ['HARRIER', 'RX300', 'RX350', 'NX250', 'NX350', 'LAND CRUISER', 'LANDCRUISER', 'DEFENDER', 'JIMNY', 'TAFT', 'MACAN', 'WRANGLER', 'GLC', 'GLA', 'GLB', 'GLE', 'URBAN']):
         return 'suv'
@@ -117,7 +125,7 @@ def extract_brand(model_str, brand_hint=""):
     return 'Recond'
 
 def parse_pdf_inventory(pdf_path=PDF_FILENAME):
-    print(f"Reading PDF file: {pdf_path}...")
+    print(f"Reading Dealer PDF: {pdf_path}...")
     records = []
     current_brand = ""
     current_section = "AVAILABLE"
@@ -128,7 +136,6 @@ def parse_pdf_inventory(pdf_path=PDF_FILENAME):
             if not tables:
                 continue
             table = tables[0]
-            links = page.hyperlinks or []
 
             for row in table:
                 if not row or len(row) < 5:
@@ -168,10 +175,11 @@ def parse_pdf_inventory(pdf_path=PDF_FILENAME):
                 status_raw = str(row[11] or "").strip() if len(row) > 11 else ""
                 
                 code = sanitize_code(stock_no)
-                price_num, price_disp, monthly = parse_price(price_raw)
+                body_num, body_disp = parse_price(price_raw)
                 grade, mileage = extract_grade_and_mileage(spec)
                 brand = extract_brand(model, current_brand)
                 category = classify_category(model)
+                slug = generate_seo_slug(brand, clean_text(model), stock_no)
                 
                 status_label = "Ready Stock"
                 if "INCOMING" in current_section or "INCOMING" in status_raw.upper():
@@ -190,16 +198,17 @@ def parse_pdf_inventory(pdf_path=PDF_FILENAME):
                     "chassis": clean_text(chassis),
                     "mileage": mileage,
                     "grade": grade,
-                    "price_rm": price_num,
-                    "price_display": price_disp,
-                    "monthly_estimate": monthly,
+                    "body_price": body_num,
+                    "price_rm": body_num,
                     "specs": clean_text(spec),
                     "status": status_label,
                     "section": current_section,
-                    "page": page_idx + 1
+                    "page": page_idx + 1,
+                    "slug": slug,
+                    "detail_url": f"stok/{slug}.html"
                 })
                 
-    print(f"[OK] Parsed {len(records)} car records from PDF.")
+    print(f"[OK] Parsed {len(records)} vehicle records from PDF.")
     return records
 
 def resolve_car_images(code):
@@ -235,89 +244,115 @@ def resolve_car_images(code):
     cover = chosen_images[0] if chosen_images else ""
     for img in chosen_images:
         img_name = os.path.basename(img)
-        if "IMG_2467" in img_name or "IMG_2468" in img_name or "10.21.19" in img_name or "12.19.34" in img_name or "06fd17e4" in img_name:
+        if any(k in img_name for k in ["IMG_2467", "IMG_2468", "10.21.19", "12.19.34", "06fd17e4", "4.40.14"]):
             cover = img
             break
             
     return chosen_images, cover, source_label
 
-def update_website_files(cars_list):
-    print("Updating cars_data.json & index.html...")
-    with open(DATA_FILENAME, "w", encoding="utf-8") as f:
-        json.dump(cars_list, f, indent=2, ensure_ascii=False)
-        
-    with open(HTML_FILENAME, "r", encoding="utf-8") as f:
-        html = f.read()
-        
-    cars_json_str = json.dumps(cars_list, indent=2, ensure_ascii=False)
-    data_pattern = re.compile(r'const allCarsData = \[[\s\S]*?\];', re.MULTILINE)
-    if data_pattern.search(html):
-        html = data_pattern.sub(f"const allCarsData = {cars_json_str};", html)
-        
-    with open(HTML_FILENAME, "w", encoding="utf-8") as f:
-        f.write(html)
-        
-    print(f"[OK] Website database updated with {len(cars_list)} cars.")
-
 def main():
-    parser = argparse.ArgumentParser(description="Sync Inventory Pipeline for Recond Car Website")
-    parser.add_argument("--limit", type=int, default=None, help="Had bilangan kereta")
+    parser = argparse.ArgumentParser(description="Smart Inventory & Pricing Sync Engine")
+    parser.add_argument("--limit", type=int, default=None, help="Limit number of cars")
     parser.add_argument("--push", action="store_true", help="Auto git commit & push to GitHub")
     args = parser.parse_args()
 
-    print("="*60)
-    print("SISTEM AUTOMASI PENYEGERAKAN INVENTORI KERETA RECOND")
-    print("="*60)
+    print("="*75)
+    print("SISTEM PENGURUSAN INVENTORI & PENETAPAN HARGA OTR KERETA RECOND")
+    print("="*75)
     
-    # 1. Parse PDF
+    settings = load_settings()
+    
+    # 1. Load Market Research Database
+    market_research = {}
+    if os.path.exists(MARKET_FILE):
+        try:
+            with open(MARKET_FILE, "r", encoding="utf-8") as f:
+                market_research = json.load(f)
+        except Exception as e:
+            print(f"[WARN] Failed to load {MARKET_FILE}: {e}")
+            
+    print(f"Pangkalan Data Market Research: {len(market_research)} rekod sedia ada.")
+    
+    # 2. Parse PDF Inventory
     pdf_cars = parse_pdf_inventory(PDF_FILENAME)
     
-    # 2. Load existing data
-    existing_cars = {}
-    if os.path.exists(DATA_FILENAME):
-        try:
-            with open(DATA_FILENAME, "r", encoding="utf-8") as f:
-                old_list = json.load(f)
-                for c in old_list:
-                    existing_cars[c.get("code")] = c
-        except Exception:
-            pass
-            
-    print(f"Rekod sedia ada dalam database: {len(existing_cars)} kereta")
+    # 3. Incremental Processing & Pricing Engine Execution
+    admin_inventory = []
+    public_inventory = []
     
-    # 3. Process cars
-    final_cars = []
     limit = args.limit if args.limit is not None else len(pdf_cars)
     
-    for i, car in enumerate(pdf_cars[:limit]):
+    unresearched_count = 0
+    high_priority_ads = []
+    
+    for car in pdf_cars[:limit]:
         code = car["code"]
-        imgs, cover, src_label = resolve_car_images(code)
+        key = get_unique_key(car)
         
+        imgs, cover, src_label = resolve_car_images(code)
         car["images"] = imgs
         car["thumbnail"] = cover
         car["image_count"] = len(imgs)
         car["source_label"] = src_label
         
-        if imgs or code in existing_cars:
-            final_cars.append(car)
-            
-    if not final_cars:
-        final_cars = list(existing_cars.values())
+        # Pull matching market intelligence
+        car_mkt = market_research.get(key) or market_research.get(car["stock_no"].replace(" ", "_").upper()) or {}
         
-    update_website_files(final_cars)
+        # Calculate full commercial metrics
+        admin_data = calculate_car_pricing(car, car_mkt, settings)
+        admin_inventory.append(admin_data)
+        
+        # Sanitize for public catalog
+        public_data = sanitize_for_public(admin_data)
+        
+        # Filter: only publish cars that have photos or were previously published
+        if imgs or car.get("price_rm", 0) > 0:
+            public_inventory.append(public_data)
+            
+        if admin_data["pricing_status"] == "UNRESEARCHED":
+            unresearched_count += 1
+        elif admin_data["ad_score"] >= 8.5 and admin_data["available_market_spread"] >= 3000:
+            high_priority_ads.append(admin_data)
+
+    # 4. Save Internal Admin Dataset
+    with open(ADMIN_INVENTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(admin_inventory, f, indent=2, ensure_ascii=False)
+    print(f"[OK] Fail dalaman {ADMIN_INVENTORY_FILE} disimpan ({len(admin_inventory)} unit lengkap maklumat Body Price & Margin).")
     
-    # 4. Git Push if requested
+    # 5. Save Public Sanitized Dataset
+    with open(PUBLIC_DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(public_inventory, f, indent=2, ensure_ascii=False)
+    print(f"[OK] Fail awam {PUBLIC_DATA_FILE} dikemaskini ({len(public_inventory)} unit selamat diterbitkan - NO body price leak).")
+
+    # 6. Summary Report
+    print("\n" + "="*75)
+    print("RINGKASAN STATUS INVENTORI & IKLAN PILIHAN (TOP ADS TO RUN)")
+    print("="*75)
+    print(f"Jumlah Stok Dalam PDF: {len(admin_inventory)} unit")
+    print(f"Stok Sedia Ada Foto / Diterbitkan: {len(public_inventory)} unit")
+    print(f"Unit Memerlukan Survey Pasaran (Unresearched): {unresearched_count} unit")
+    print(f"Unit Berpotensi Iklan Tinggi (Ad Score >= 8.5): {len(high_priority_ads)} unit\n")
+    
+    # Sort top ads
+    high_priority_ads.sort(key=lambda x: x["ad_score"], reverse=True)
+    for idx, top in enumerate(high_priority_ads[:6]):
+        print(f"🔥 #{idx+1} [{top['stock_no']}] {top['brand']} {top['model']} ({top['year']})")
+        print(f"   Ad Score: {top['ad_score']}/10 | Market Spread: RM {top['available_market_spread']:,}")
+        print(f"   Body Price: RM {top['body_price']:,} | Est OTR: RM {top['advertised_price_ncd55']:,} (Market: RM {top['market_median']:,})")
+        print(f"   Cadangan Komisen: RM {top['suggested_commission']:,} | Buffer: RM {top['negotiation_buffer']:,}\n")
+
+    print("="*75)
+    
+    # 7. Git Push if requested
     if args.push:
         print("\nMenolak (push) perubahan ke GitHub...")
-        subprocess.run(["git", "add", "cars_data.json", "index.html", "public/"], check=False)
-        subprocess.run(["git", "commit", "-m", f"chore(sync): update inventory sync ({len(final_cars)} units)"], check=False)
+        subprocess.run(["git", "add", "cars_data.json", "admin_inventory.json", "market_research.json", "pricing_settings.json"], check=False)
+        subprocess.run(["git", "commit", "-m", f"chore(sync): update inventory & smart pricing engine ({len(public_inventory)} units)"], check=False)
         res = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True)
         if res.returncode == 0:
             print("[OK] Berjaya push ke GitHub! Cloudflare Pages sedang auto-deploy.")
         else:
             print(f"[WARN] Git push output: {res.stderr or res.stdout}")
-            
-    print("\nProses penyegerakan inventori selesai!")
 
 if __name__ == "__main__":
     main()

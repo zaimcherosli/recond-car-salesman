@@ -713,7 +713,7 @@ katalog_body = """
                     + '</div>'
                     + '<div class="pt-4 border-t border-slate-100 space-y-3">'
                     + '<div class="flex items-center justify-between">'
-                    + '<div><span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span><span class="text-lg font-bold text-slate-950">' + car.price_display + '</span></div>'
+                    + '<div><span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran OTR (55% NCD):</span><span class="text-base sm:text-lg font-bold text-slate-950">' + car.price_display + '</span></div>'
                     + '<div class="text-right"><span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span><span class="text-xs font-bold text-amber-700">' + car.monthly_estimate + '</span></div>'
                     + '</div>'
                     + '<div class="grid grid-cols-2 gap-2">'
@@ -821,22 +821,23 @@ with open("katalog.html", "w", encoding="utf-8") as out_f:
 
 print("katalog.html generated!")
 
-# Re-generate all 20 detail pages in stok/<slug>.html with clean navbar
 for idx, car in enumerate(cars):
     related = [c for c in cars if c['code'] != car['code'] and (c['brand'] == car['brand'] or c['category'] == car['category'])][:4]
     if len(related) < 4:
         related = [c for c in cars if c['code'] != car['code']][:4]
 
-    cover_img = car.get('thumbnail') or (car.get('images', [''])[0]) or 'public/cars/placeholder.jpg'
-    images = car.get('images', [])
-    if not images:
-        images = [cover_img]
+    imgs_list = car.get('images') or []
+    cover_img = car.get('thumbnail') or (imgs_list[0] if len(imgs_list) > 0 else '') or 'public/cars/placeholder.jpg'
+    images = imgs_list if len(imgs_list) > 0 else [cover_img]
     img_json = json.dumps(images)
     og_img_url = f"{BASE_URL}/{cover_img}" if not cover_img.startswith("http") else cover_img
     page_url = f"{BASE_URL}/stok/{car['slug']}.html"
     
     wa_msg = f"Salam Sales Advisor, saya berminat dengan stok ({car['stock_no']}) {car['model']} tahun {car['year']} (Casis: {car['chassis']}) harga {car['price_display']}. Boleh saya dapatkan maklumat lanjut dan semakan loan?"
     wa_link = f"https://wa.me/60108118559?text={urllib.parse.quote(wa_msg)}"
+    
+    p_55 = int(car.get('estimated_otr_ncd55') or car.get('price_rm') or 0)
+    p_0 = int(car.get('estimated_otr_ncd0') or (p_55 + 3000 if p_55 > 0 else 0))
     
     schema_data = {
         "@context": "https://schema.org",
@@ -861,7 +862,7 @@ for idx, car in enumerate(cars):
     
     related_html = ""
     for rel in related:
-        rel_cover = rel.get('thumbnail') or (rel.get('images', [''])[0]) or '../public/cars/placeholder.jpg'
+        rel_cover = rel.get('thumbnail') or ((rel.get('images') or [''])[0]) or '../public/cars/placeholder.jpg'
         if not rel_cover.startswith("../") and not rel_cover.startswith("http"):
             rel_cover = f"../{rel_cover}"
         related_html += f"""
@@ -977,15 +978,36 @@ for idx, car in enumerate(cars):
                         <h1 class="font-display text-xl sm:text-2xl font-bold text-slate-900 mt-1 leading-tight">{car['model']}</h1>
                     </div>
 
-                    <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
-                        <div>
-                            <span class="text-[11px] text-slate-600 block font-medium">Harga Tawaran:</span>
-                            <span class="text-xl sm:text-2xl font-bold text-slate-950">{car['price_display']}</span>
+                    <!-- Customer NCD Selector -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Pilihan Diskaun Insurans (NCD):</span>
+                            <span class="text-[10px] text-amber-700 font-semibold">Tukar untuk semak OTR</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-[11px] text-slate-600 block font-medium">Anggaran Bulanan:</span>
-                            <span class="text-sm sm:text-base font-bold text-amber-700">{car['monthly_estimate']}</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" id="ncd-btn-55" onclick="setNcdMode(55)" class="py-2 px-3 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all text-center">
+                                55% NCD (Diskaun Penuh)
+                            </button>
+                            <button type="button" id="ncd-btn-0" onclick="setNcdMode(0)" class="py-2 px-3 rounded-xl bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider border border-slate-300 transition-all text-center">
+                                0% NCD (Kereta Pertama)
+                            </button>
                         </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[11px] text-slate-600 block font-medium">Anggaran Harga Atas Jalan (OTR):</span>
+                                <span id="car-price-display" class="text-xl sm:text-2xl font-bold text-slate-950">{car['price_display']}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[11px] text-slate-600 block font-medium">Anggaran Bulanan:</span>
+                                <span id="car-monthly-display" class="text-sm sm:text-base font-bold text-amber-700">{car['monthly_estimate']}</span>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-slate-500 italic leading-snug pt-1 border-t border-amber-500/20">
+                            *Anggaran OTR berdasarkan NCD terpilih. Harga akhir tertakluk kepada sebut harga insurans rasmi & caj pendaftaran spesifik kenderaan.
+                        </p>
                     </div>
 
                     <a href="{wa_link}" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 rounded-2xl bg-brand-emerald hover:bg-brand-emeraldHover text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 text-center">
@@ -1006,9 +1028,9 @@ for idx, car in enumerate(cars):
                         <div>
                             <div class="flex justify-between font-semibold text-slate-700 mb-1">
                                 <span>Bayaran Muka (Downpayment 10%):</span>
-                                <span id="calc-dp-text" class="text-amber-700 font-bold">RM {int(car['price_rm']*0.1):,}</span>
+                                <span id="calc-dp-text" class="text-amber-700 font-bold">RM {int((car.get('estimated_otr_ncd55') or car.get('price_rm', 0))*0.1):,}</span>
                             </div>
-                            <input type="range" id="calc-dp-slider" min="0" max="{int(car['price_rm']*0.5)}" step="5000" value="{int(car['price_rm']*0.1)}" oninput="updateCarLoan()" class="w-full accent-amber-500">
+                            <input type="range" id="calc-dp-slider" min="0" max="{int((car.get('estimated_otr_ncd55') or car.get('price_rm', 0))*0.5)}" step="5000" value="{int((car.get('estimated_otr_ncd55') or car.get('price_rm', 0))*0.1)}" oninput="updateCarLoan()" class="w-full accent-amber-500">
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
@@ -1057,8 +1079,37 @@ for idx, car in enumerate(cars):
 
     <script>
         const carImages = {img_json};
-        const carPrice = {car['price_rm']};
+        const priceNcd55 = {p_55};
+        const priceNcd0 = {p_0};
+        let activeNcdMode = 55;
+        let carPrice = priceNcd55;
         let currentImgIdx = 0;
+
+        function setNcdMode(ncd) {{
+            activeNcdMode = ncd;
+            carPrice = (ncd === 55) ? priceNcd55 : priceNcd0;
+            
+            const btn55 = document.getElementById('ncd-btn-55');
+            const btn0 = document.getElementById('ncd-btn-0');
+            const priceDisp = document.getElementById('car-price-display');
+
+            if (ncd === 55) {{
+                btn55.className = "py-2 px-3 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all text-center";
+                btn0.className = "py-2 px-3 rounded-xl bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider border border-slate-300 transition-all text-center";
+                if (priceDisp) priceDisp.innerText = 'RM ' + priceNcd55.toLocaleString() + '*';
+            }} else {{
+                btn0.className = "py-2 px-3 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all text-center";
+                btn55.className = "py-2 px-3 rounded-xl bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider border border-slate-300 transition-all text-center";
+                if (priceDisp) priceDisp.innerText = 'RM ' + priceNcd0.toLocaleString() + '*';
+            }}
+
+            const slider = document.getElementById('calc-dp-slider');
+            if (slider) {{
+                slider.max = Math.round(carPrice * 0.5);
+                slider.value = Math.round(carPrice * 0.1);
+            }}
+            updateCarLoan();
+        }}
 
         function switchDetailImage(idx) {{
             if (idx < 0 || idx >= carImages.length) return;
@@ -1112,6 +1163,8 @@ for idx, car in enumerate(cars):
 
             const resultEl = document.getElementById('calc-monthly-result');
             if (resultEl) resultEl.innerText = '~RM ' + monthly.toLocaleString() + ' / bln';
+            const carMonthlyDisp = document.getElementById('car-monthly-display');
+            if (carMonthlyDisp) carMonthlyDisp.innerText = '~RM ' + monthly.toLocaleString() + ' / bln';
         }}
 
         window.addEventListener('keydown', function(e) {{

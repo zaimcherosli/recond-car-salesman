@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-08-28T19:25:00+08:00",
+  "default_otr_addition_ncd55": 7000,
+  "default_otr_addition_ncd0": 10000,
+  "default_negotiation_buffer": 1800,
+  "freshness_threshold_fresh_days": 7,
+  "freshness_threshold_moderate_days": 14,
+  "commission_rules": [
+    {
+      "max_body": 99999,
+      "target_commission": 3000,
+      "min_commission": 1500
+    },
+    {
+      "max_body": 149999,
+      "target_commission": 4500,
+      "min_commission": 2500
+    },
+    {
+      "max_body": 199999,
+      "target_commission": 5500,
+      "min_commission": 3000
+    },
+    {
+      "max_body": 299999,
+      "target_commission": 7000,
+      "min_commission": 4000
+    },
+    {
+      "max_body": 999999999,
+      "target_commission": 10000,
+      "min_commission": 5000
+    }
+  ],
+  "category_otr_overrides": {
+    "performance": {
+      "ncd55": 8500,
+      "ncd0": 12000
+    },
+    "luxury": {
+      "ncd55": 10000,
+      "ncd0": 15000
+    }
+  },
+  "model_otr_overrides": {}
+}
