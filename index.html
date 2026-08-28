@@ -317,312 +317,352 @@
                 </div>
 
                 <!-- Category Tabs Filter (Scrollable Touch Pills Sebaris Kemas) -->
-                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap" id="filter-tabs">
-                    <button onclick="filterCars('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-900 text-white transition-all shadow-sm flex-shrink-0 whitespace-nowrap">Semua Model</button>
-                    <button onclick="filterCars('mpv')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">MPV Keluarga</button>
-                    <button onclick="filterCars('suv')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">SUV & Crossover</button>
-                    <button onclick="filterCars('sedan')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">Sedan Eksekutif</button>
-                    <button onclick="filterCars('performance')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">Prestasi / Sukan</button>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pt-2">
+                    <!-- Category Tabs Filter -->
+                    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap" id="filter-tabs">
+                        <button onclick="filterCars('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-900 text-white transition-all shadow-sm flex-shrink-0 whitespace-nowrap">Semua Model (4)</button>
+                        <button onclick="filterCars('hatchback')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">Hatchback (3)</button>
+                        <button onclick="filterCars('performance')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex-shrink-0 whitespace-nowrap">Prestasi / Sukan (1)</button>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative max-w-xs w-full">
+                        <input type="text" id="car-search-input" onkeyup="searchCars()" placeholder="Cari Stock No, Model, Casis..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-amber-500 transition-all">
+                        <span class="absolute right-3 top-2.5 text-xs text-slate-400">🔍</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Car Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" id="cars-grid">
 
-                <!-- Car 1: Alphard SC -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="mpv">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">MPV Eksekutif</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Toyota Alphard 2.5 SC</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 4.5A / 5A</span>
+                <!-- Car Card: AM 495 -->
+                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between" data-category="hatchback" data-brand="bmw" data-search="AM 495 BMW M135i xDrive BMW Black 2023/5 WBA7L120807M12521">
+                    <!-- Image Header with Click to Gallery -->
+                    <div class="relative group cursor-pointer overflow-hidden bg-slate-900 aspect-[16/10]" onclick="openCarGallery('AM_495')">
+                        <img src="public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.34 PM (1).jpeg" alt="BMW M135i xDrive" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        
+                        <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: AM 495</span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">READY STOCK</span>
                         </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2020 - 2023 | Jepun Spec Asli</div>
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[11px] font-extrabold shadow-md">GRED 5A</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
+                                📷 34 Foto (Malaysia Stock)
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-slate-950 text-xs font-bold uppercase tracking-wider bg-amber-400 px-4 py-2 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                Buka Galeri (34 Foto)
+                            </span>
+                        </div>
                     </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Enjin:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">2.5L Dual VVT-i</span>
+
+                    <!-- Details Body -->
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+                        <div>
+                            <div class="flex justify-between items-start gap-2">
+                                <div class="min-w-0">
+                                    <span class="text-[10px] sm:text-[11px] font-bold text-amber-700 uppercase tracking-wider">BMW • 2023/5</span>
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 leading-snug">BMW M135i xDrive</h3>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Kapasiti:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">7 Pilot Seats</span>
+                            <div class="text-xs text-slate-500 mt-1 font-medium flex items-center gap-2">
+                                <span>Warna Black</span>
+                                <span>•</span>
+                                <span>24,300 KM</span>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Ciri:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Sunroof, 360 Cam</span>
+
+                            <!-- Specs Grid -->
+                            <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">No. Casis:</span>
+                                    <span class="text-slate-900 font-mono font-semibold text-[11px] truncate block" title="WBA7L120807M12521">WBA7L120807M12521</span>
+                                </div>
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gred Kenderaan:</span>
+                                    <span class="text-slate-900 font-semibold text-xs truncate block">Gred 5A Lelongan</span>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Audio:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">JBL Sound</span>
+
+                            <div class="mt-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 line-clamp-2">
+                                <span class="font-bold text-slate-800">Spesifikasi:</span> HiFi Speaker, Fabric Seat, M Sport Seat, PB, Radar Cruise, Memory Seat (24,300 KM) Grade 5A
                             </div>
                         </div>
 
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 235k - RM 289k</span>
+                        <!-- Pricing & Actions -->
+                        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span>
+                                    <span class="text-base sm:text-lg font-bold text-slate-900">RM 195,000</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
+                                    <span class="text-xs sm:text-sm font-bold text-amber-700">RM 2,210 / bln</span>
+                                </div>
                             </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 2,650 / bln</span>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="calculateForCar(195000, 'AM 495 - BMW M135i xDrive')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
+                                    Kira Loan
+                                </button>
+                                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor%2C%20saya%20berminat%20dengan%20stok%20%28AM%20495%29%20BMW%20M135i%20xDrive%20harga%20RM%20195%2C000.%20Boleh%20saya%20dapatkan%20maklumat%20lanjut%20dan%20semakan%20loan%3F" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
+                                    WhatsApp
+                                </a>
                             </div>
                         </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20dengan%20stok%20Toyota%20Alphard%202.5%20SC.%20Boleh%20kongsikan%20senarai%20unit%20dan%20gambar?" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Car 2: Vellfire ZG -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="mpv">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">MPV Sukan Eksekutif</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Toyota Vellfire 2.5 ZG</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 4.5B / 5A</span>
-                        </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2020 - 2023 | Rekaan Muka Garang</div>
-                    </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Kerusi:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Pilot Seat Memory</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Pintu:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">2 Power Door + Boot</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Sistem:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Toyota Safety Sense</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Bumbung:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Twin Moonroof</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 228k - RM 275k</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 2,550 / bln</span>
-                            </div>
-                        </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20dengan%20Toyota%20Vellfire%20ZG.%20Sila%20berikan%20maklumat%20stok%20tersedia." target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
                     </div>
                 </div>
 
-                <!-- Car 3: Toyota Harrier -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="suv">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">SUV Mewah Urban</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Toyota Harrier 2.0 Z/G</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 4.5A / 5A</span>
+                <!-- Car Card: DC 604 -->
+                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between" data-category="hatchback" data-brand="bmw" data-search="DC 604 BMW M135 xDrive (Facelift) BMW Grey 2024/10 WBA22GE0307R40365">
+                    <!-- Image Header with Click to Gallery -->
+                    <div class="relative group cursor-pointer overflow-hidden bg-slate-900 aspect-[16/10]" onclick="openCarGallery('DC_604')">
+                        <img src="public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.19 AM.jpeg" alt="BMW M135 xDrive (Facelift)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        
+                        <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: DC 604</span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">READY STOCK</span>
                         </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2020 - 2023 | Model MXUA80</div>
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[11px] font-extrabold shadow-md">GRED 5A</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
+                                📷 30 Foto (Malaysia Stock)
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-slate-950 text-xs font-bold uppercase tracking-wider bg-amber-400 px-4 py-2 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                Buka Galeri (30 Foto)
+                            </span>
+                        </div>
                     </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Enjin:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">2.0L Dynamic Force</span>
+
+                    <!-- Details Body -->
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+                        <div>
+                            <div class="flex justify-between items-start gap-2">
+                                <div class="min-w-0">
+                                    <span class="text-[10px] sm:text-[11px] font-bold text-amber-700 uppercase tracking-wider">BMW • 2024/10</span>
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 leading-snug">BMW M135 xDrive (Facelift)</h3>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Skrin:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">12.3-inci Display</span>
+                            <div class="text-xs text-slate-500 mt-1 font-medium flex items-center gap-2">
+                                <span>Warna Grey</span>
+                                <span>•</span>
+                                <span>6,094 KM</span>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Bumbung:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Dimmable Roof</span>
+
+                            <!-- Specs Grid -->
+                            <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">No. Casis:</span>
+                                    <span class="text-slate-900 font-mono font-semibold text-[11px] truncate block" title="WBA22GE0307R40365">WBA22GE0307R40365</span>
+                                </div>
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gred Kenderaan:</span>
+                                    <span class="text-slate-900 font-semibold text-xs truncate block">Gred 5A Lelongan</span>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Audio:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">JBL 9 Speakers</span>
+
+                            <div class="mt-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 line-clamp-2">
+                                <span class="font-bold text-slate-800">Spesifikasi:</span> Face Lifted, 360 Cam, Adaptive LED Headlights, HUD, Adaptive Cruise, Half Leather Seat, PB, Harman Kardon, 19 AW
                             </div>
                         </div>
 
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 168k - RM 215k</span>
+                        <!-- Pricing & Actions -->
+                        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span>
+                                    <span class="text-base sm:text-lg font-bold text-slate-900">RM 250,000</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
+                                    <span class="text-xs sm:text-sm font-bold text-amber-700">RM 2,830 / bln</span>
+                                </div>
                             </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 1,890 / bln</span>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="calculateForCar(250000, 'DC 604 - BMW M135 xDrive (Facelift)')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
+                                    Kira Loan
+                                </button>
+                                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor%2C%20saya%20berminat%20dengan%20stok%20%28DC%20604%29%20BMW%20M135%20xDrive%20%28Facelift%29%20harga%20RM%20250%2C000.%20Boleh%20saya%20dapatkan%20maklumat%20lanjut%20dan%20semakan%20loan%3F" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
+                                    WhatsApp
+                                </a>
                             </div>
                         </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20ingin%20tahu%20maklumat%20lanjut%20mengenai%20Toyota%20Harrier%20Z/G." target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Car 4: Lexus RX300 -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="suv">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">SUV Prestij Premium</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Lexus RX300 F-Sport</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 4.5A / 5A</span>
-                        </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2019 - 2022 | Facelift Model</div>
-                    </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Enjin:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">2.0L Turbo 235HP</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Pacuan:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">6-Speed AWD</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Lampu:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">BladeScan 3-LED</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Audio:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Mark Levinson</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 245k - RM 310k</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 2,750 / bln</span>
-                            </div>
-                        </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20dengan%20Lexus%20RX300%20F-Sport.%20Boleh%20semak%20stok?" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
                     </div>
                 </div>
 
-                <!-- Car 5: Mercedes-Benz C200 / C300 -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="sedan">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">Sedan Eksekutif Jerman</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Mercedes-Benz C200 AMG</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 4.5B / 5A</span>
+                <!-- Car Card: SA 2109 -->
+                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between" data-category="hatchback" data-brand="bmw" data-search="SA 2109 BMW 118i M Sport BMW White 2021/7 WBA7K320X07J12302">
+                    <!-- Image Header with Click to Gallery -->
+                    <div class="relative group cursor-pointer overflow-hidden bg-slate-900 aspect-[16/10]" onclick="openCarGallery('SA_2109')">
+                        <img src="public/cars/SA_2109/Japan/81574_IMG_2467.jpeg" alt="BMW 118i M Sport" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        
+                        <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: SA 2109</span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">READY STOCK</span>
                         </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2020 - 2023 | W205 / W206</div>
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[11px] font-extrabold shadow-md">GRED 4.5B</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
+                                📷 23 Foto (Japan Auction Stock)
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-slate-950 text-xs font-bold uppercase tracking-wider bg-amber-400 px-4 py-2 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                Buka Galeri (23 Foto)
+                            </span>
+                        </div>
                     </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Pakej:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">AMG 19" Rims</span>
+
+                    <!-- Details Body -->
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+                        <div>
+                            <div class="flex justify-between items-start gap-2">
+                                <div class="min-w-0">
+                                    <span class="text-[10px] sm:text-[11px] font-bold text-amber-700 uppercase tracking-wider">BMW • 2021/7</span>
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 leading-snug">BMW 118i M Sport</h3>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Kokpit:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Digital Ambient Display</span>
+                            <div class="text-xs text-slate-500 mt-1 font-medium flex items-center gap-2">
+                                <span>Warna White</span>
+                                <span>•</span>
+                                <span>20,117 KM</span>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Lampu:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Multibeam LED</span>
+
+                            <!-- Specs Grid -->
+                            <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">No. Casis:</span>
+                                    <span class="text-slate-900 font-mono font-semibold text-[11px] truncate block" title="WBA7K320X07J12302">WBA7K320X07J12302</span>
+                                </div>
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gred Kenderaan:</span>
+                                    <span class="text-slate-900 font-semibold text-xs truncate block">Gred 4.5B Lelongan</span>
+                                </div>
                             </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Audio:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Burmester Sound</span>
+
+                            <div class="mt-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 line-clamp-2">
+                                <span class="font-bold text-slate-800">Spesifikasi:</span> Sunroof, Power Boot, Adaptive Cruise Control, Memory Seat, M Sport (20,117 KM) Grade 4.5B
                             </div>
                         </div>
 
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 195k - RM 265k</span>
+                        <!-- Pricing & Actions -->
+                        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span>
+                                    <span class="text-base sm:text-lg font-bold text-slate-900">RM 129,000</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
+                                    <span class="text-xs sm:text-sm font-bold text-amber-700">RM 1,460 / bln</span>
+                                </div>
                             </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 2,190 / bln</span>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="calculateForCar(129000, 'SA 2109 - BMW 118i M Sport')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
+                                    Kira Loan
+                                </button>
+                                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor%2C%20saya%20berminat%20dengan%20stok%20%28SA%202109%29%20BMW%20118i%20M%20Sport%20harga%20RM%20129%2C000.%20Boleh%20saya%20dapatkan%20maklumat%20lanjut%20dan%20semakan%20loan%3F" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
+                                    WhatsApp
+                                </a>
                             </div>
                         </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20dengan%20Mercedes-Benz%20C-Class%20AMG.%20Boleh%20kongsikan%20gambar%20stok?" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Car 6: Honda Civic Type R FL5 / FK8 -->
-                <div class="car-card custom-card rounded-2xl overflow-hidden" data-category="performance">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/60">
-                        <div class="flex justify-between items-start gap-2">
-                            <div class="min-w-0">
-                                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">Hatchback Prestasi Tinggi</span>
-                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">Civic Type R FL5 / FK8</h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] sm:text-[11px] font-mono font-bold border border-amber-200 flex-shrink-0">Gred 5A / S Asli</span>
-                        </div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium">Tahun 2020 - 2023 | 6-Speed Manual Asli</div>
-                    </div>
-                    <div class="p-5 space-y-4">
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Enjin:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">2.0L Turbo 315HP</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gear:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">6-MT Rev-Match</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Kerusi:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Type R Red Bucket</span>
-                            </div>
-                            <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                <span class="text-slate-500 block text-[10px] sm:text-[11px]">Brek:</span>
-                                <span class="text-slate-900 font-semibold text-xs truncate block">Brembo 4-Piston</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                            <div>
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Pasaran:</span>
-                                <span class="text-xs sm:text-sm font-bold text-slate-900">RM 275k - RM 345k</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
-                                <span class="text-xs sm:text-sm font-bold text-amber-700">Dari RM 3,090 / bln</span>
-                            </div>
-                        </div>
-
-                        <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20ingin%20mencari%20Civic%20Type%20R%20FL5/FK8%20recond." target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center">
-                            Tanya Stok via WhatsApp
-                        </a>
                     </div>
                 </div>
 
+                <!-- Car Card: BM 2267 -->
+                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between" data-category="performance" data-brand="bmw" data-search="BM 2267 BMW M4 Competition M xDrive (AT) BMW Black 2024/2 WBS42AZ060CP51079">
+                    <!-- Image Header with Click to Gallery -->
+                    <div class="relative group cursor-pointer overflow-hidden bg-slate-900 aspect-[16/10]" onclick="openCarGallery('BM_2267')">
+                        <img src="public/cars/BM_2267/Malay 10-7-26/06fd17e4-6ca8-473d-979a-1c9f6a780d40.jpg" alt="BMW M4 Competition M xDrive (AT)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        
+                        <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: BM 2267</span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">READY STOCK</span>
+                        </div>
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[11px] font-extrabold shadow-md">GRED 4.5A</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
+                                📷 15 Foto (Malaysia Stock)
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-slate-950 text-xs font-bold uppercase tracking-wider bg-amber-400 px-4 py-2 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                Buka Galeri (15 Foto)
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Details Body -->
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+                        <div>
+                            <div class="flex justify-between items-start gap-2">
+                                <div class="min-w-0">
+                                    <span class="text-[10px] sm:text-[11px] font-bold text-amber-700 uppercase tracking-wider">BMW • 2024/2</span>
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 leading-snug">BMW M4 Competition M xDrive (AT)</h3>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-500 mt-1 font-medium flex items-center gap-2">
+                                <span>Warna Black</span>
+                                <span>•</span>
+                                <span>22,985 KM</span>
+                            </div>
+
+                            <!-- Specs Grid -->
+                            <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">No. Casis:</span>
+                                    <span class="text-slate-900 font-mono font-semibold text-[11px] truncate block" title="WBS42AZ060CP51079">WBS42AZ060CP51079</span>
+                                </div>
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gred Kenderaan:</span>
+                                    <span class="text-slate-900 font-semibold text-xs truncate block">Gred 4.5A Lelongan</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 line-clamp-2">
+                                <span class="font-bold text-slate-800">Spesifikasi:</span> Carbon Roof, Harman Kardon, Parking Assist Plus, Laser Light, Power Boot, 360, Curved Display, HUD, Red Caliper, Front 19" Rear 20"
+                            </div>
+                        </div>
+
+                        <!-- Pricing & Actions -->
+                        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span>
+                                    <span class="text-base sm:text-lg font-bold text-slate-900">RM 490,000</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
+                                    <span class="text-xs sm:text-sm font-bold text-amber-700">RM 5,550 / bln</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="calculateForCar(490000, 'BM 2267 - BMW M4 Competition M xDrive (AT)')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
+                                    Kira Loan
+                                </button>
+                                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor%2C%20saya%20berminat%20dengan%20stok%20%28BM%202267%29%20BMW%20M4%20Competition%20M%20xDrive%20%28AT%29%20harga%20RM%20490%2C000.%20Boleh%20saya%20dapatkan%20maklumat%20lanjut%20dan%20semakan%20loan%3F" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Custom Order / Stock Request Banner -->
@@ -1098,7 +1138,7 @@
 
             cards.forEach(card => {
                 if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
+                    card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
@@ -1139,6 +1179,358 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(openClearancePopup, 800);
         });
+    
+        // Car Data for Gallery
+        const allCarsData = [
+  {
+    "stock_no": "AM 495",
+    "code": "AM_495",
+    "brand": "BMW",
+    "model": "BMW M135i xDrive",
+    "category": "hatchback",
+    "year": "2023/5",
+    "color": "Black",
+    "chassis": "WBA7L120807M12521",
+    "mileage": "24,300 KM",
+    "grade": "5A",
+    "price_rm": 195000,
+    "price_display": "RM 195,000",
+    "monthly_estimate": "RM 2,210 / bln",
+    "specs": "HiFi Speaker, Fabric Seat, M Sport Seat, PB, Radar Cruise, Memory Seat (24,300 KM) Grade 5A",
+    "highlights": [
+      "Grade 5A",
+      "Mileage 24k KM",
+      "M Sport Seat",
+      "HiFi Speaker"
+    ],
+    "status": "Ready Stock",
+    "images": [
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.34 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.34 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.35 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.36 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.36 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.37 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.37 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.38 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.39 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.39 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.40 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.41 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.41 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.42 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.42 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.43 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.43 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.44 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.44 PM (2).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.44 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.45 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.45 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.46 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.46 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.47 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.47 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.48 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.48 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.49 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.49 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.50 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.50 PM.jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.51 PM (1).jpeg",
+      "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.51 PM.jpeg"
+    ],
+    "thumbnail": "public/cars/AM_495/Malay 25-6/WhatsApp Image 2026-06-24 at 12.19.34 PM (1).jpeg",
+    "image_count": 34,
+    "source_label": "Malaysia Stock"
+  },
+  {
+    "stock_no": "DC 604",
+    "code": "DC_604",
+    "brand": "BMW",
+    "model": "BMW M135 xDrive (Facelift)",
+    "category": "hatchback",
+    "year": "2024/10",
+    "color": "Grey",
+    "chassis": "WBA22GE0307R40365",
+    "mileage": "6,094 KM",
+    "grade": "5A",
+    "price_rm": 250000,
+    "price_display": "RM 250,000",
+    "monthly_estimate": "RM 2,830 / bln",
+    "specs": "Face Lifted, 360 Cam, Adaptive LED Headlights, HUD, Adaptive Cruise, Half Leather Seat, PB, Harman Kardon, 19 AW",
+    "highlights": [
+      "Facelift Model",
+      "Grade 5A",
+      "Low Mileage 6k KM",
+      "Harman Kardon + 360 Cam"
+    ],
+    "status": "Ready Stock",
+    "images": [
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.19 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.20 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.24 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.25 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.25 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.26 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.27 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.28 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.29 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.29 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.30 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.30 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.31 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.31 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.32 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.33 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.33 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.34 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.34 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.35 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.36 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.36 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.37 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.37 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.38 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.38 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.39 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.40 AM (1).jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.40 AM.jpeg",
+      "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.41 AM.jpeg"
+    ],
+    "thumbnail": "public/cars/DC_604/Malay 29-7/WhatsApp Image 2026-07-29 at 10.21.19 AM.jpeg",
+    "image_count": 30,
+    "source_label": "Malaysia Stock"
+  },
+  {
+    "stock_no": "SA 2109",
+    "code": "SA_2109",
+    "brand": "BMW",
+    "model": "BMW 118i M Sport",
+    "category": "hatchback",
+    "year": "2021/7",
+    "color": "White",
+    "chassis": "WBA7K320X07J12302",
+    "mileage": "20,117 KM",
+    "grade": "4.5B",
+    "price_rm": 129000,
+    "price_display": "RM 129,000",
+    "monthly_estimate": "RM 1,460 / bln",
+    "specs": "Sunroof, Power Boot, Adaptive Cruise Control, Memory Seat, M Sport (20,117 KM) Grade 4.5B",
+    "highlights": [
+      "Grade 4.5B",
+      "Sunroof",
+      "Power Boot",
+      "Adaptive Cruise"
+    ],
+    "status": "Ready Stock",
+    "images": [
+      "public/cars/SA_2109/Japan/81571_IMG_2463.jpeg",
+      "public/cars/SA_2109/Japan/81572_IMG_2464.jpeg",
+      "public/cars/SA_2109/Japan/81573_IMG_2466.jpeg",
+      "public/cars/SA_2109/Japan/81574_IMG_2467.jpeg",
+      "public/cars/SA_2109/Japan/81575_IMG_2468.jpeg",
+      "public/cars/SA_2109/Japan/81576_IMG_2469.jpeg",
+      "public/cars/SA_2109/Japan/81577_IMG_2470.jpeg",
+      "public/cars/SA_2109/Japan/81578_IMG_2471.jpeg",
+      "public/cars/SA_2109/Japan/81579_IMG_2472.jpeg",
+      "public/cars/SA_2109/Japan/81580_IMG_2473.jpeg",
+      "public/cars/SA_2109/Japan/81581_IMG_2474.jpeg",
+      "public/cars/SA_2109/Japan/81582_IMG_2475.jpeg",
+      "public/cars/SA_2109/Japan/81583_IMG_2476.jpeg",
+      "public/cars/SA_2109/Japan/81584_IMG_2477.jpeg",
+      "public/cars/SA_2109/Japan/81585_IMG_2478.jpeg",
+      "public/cars/SA_2109/Japan/81586_IMG_2479.jpeg",
+      "public/cars/SA_2109/Japan/81587_IMG_2480.jpeg",
+      "public/cars/SA_2109/Japan/81588_IMG_2481.jpeg",
+      "public/cars/SA_2109/Japan/81589_IMG_2482.jpeg",
+      "public/cars/SA_2109/Japan/WhatsApp Image 2026-05-06 at 14.31.44.jpeg",
+      "public/cars/SA_2109/Japan/WhatsApp Image 2026-05-06 at 14.31.45 (1).jpeg",
+      "public/cars/SA_2109/Japan/WhatsApp Image 2026-05-06 at 14.31.45.jpeg",
+      "public/cars/SA_2109/Japan/WhatsApp Image 2026-05-06 at 14.31.46.jpeg"
+    ],
+    "thumbnail": "public/cars/SA_2109/Japan/81574_IMG_2467.jpeg",
+    "image_count": 23,
+    "source_label": "Japan Auction Stock"
+  },
+  {
+    "stock_no": "BM 2267",
+    "code": "BM_2267",
+    "brand": "BMW",
+    "model": "BMW M4 Competition M xDrive (AT)",
+    "category": "performance",
+    "year": "2024/2",
+    "color": "Black",
+    "chassis": "WBS42AZ060CP51079",
+    "mileage": "22,985 KM",
+    "grade": "4.5A",
+    "price_rm": 490000,
+    "price_display": "RM 490,000",
+    "monthly_estimate": "RM 5,550 / bln",
+    "specs": "Carbon Roof, Harman Kardon, Parking Assist Plus, Laser Light, Power Boot, 360, Curved Display, HUD, Red Caliper, Front 19\" Rear 20\"",
+    "highlights": [
+      "M4 Competition xDrive",
+      "Carbon Roof",
+      "Laser Light",
+      "Curved Display + HUD"
+    ],
+    "status": "Ready Stock",
+    "images": [
+      "public/cars/BM_2267/Malay 10-7-26/06fd17e4-6ca8-473d-979a-1c9f6a780d40.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/16b45eff-d9cb-4adb-b57a-8f736c36a280.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/2e313f37-8b64-4dcb-b89f-742d4cb15692.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/79e4550e-9f95-4bd7-af65-c45aa0d4879f.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/8118e2b3-ded8-441e-9259-9793560cc48e.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/87c34615-3c1c-4ac9-81dc-77c6015a8045.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/9c1082b1-e521-4f1b-8970-d3a34eb4cb40.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/a033d62f-2d95-408e-b315-98b5c04fd252.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/a2f416c6-5c12-4dde-8da6-921ce11a12b3.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/b1dfcb95-4a09-41dd-8210-e95848913d35.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/b770317e-b997-41b5-b744-440ae4245724.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/e2665610-4473-49ae-966f-43d00ce54e97.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/ec4166fc-598d-4e24-95b3-e8088f33a57f.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/f7db21d1-061e-4ef5-b8b1-c6bc4f6a45c2.jpg",
+      "public/cars/BM_2267/Malay 10-7-26/f7e77f0b-57dc-4fc7-b3ff-732daacdaa0d.jpg"
+    ],
+    "thumbnail": "public/cars/BM_2267/Malay 10-7-26/06fd17e4-6ca8-473d-979a-1c9f6a780d40.jpg",
+    "image_count": 15,
+    "source_label": "Malaysia Stock"
+  }
+];
+
+        let currentGalleryCar = null;
+        let currentImageIndex = 0;
+
+        function openCarGallery(code) {
+            currentGalleryCar = allCarsData.find(c => c.code === code);
+            if (!currentGalleryCar || !currentGalleryCar.images.length) return;
+
+            currentImageIndex = 0;
+            updateGalleryModal();
+
+            const modal = document.getElementById('car-gallery-modal');
+            const content = document.getElementById('gallery-modal-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCarGallery() {
+            const modal = document.getElementById('car-gallery-modal');
+            const content = document.getElementById('gallery-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            content.classList.add('scale-95');
+            content.classList.remove('scale-100');
+            document.body.style.overflow = '';
+        }
+
+        function updateGalleryModal() {
+            if (!currentGalleryCar) return;
+
+            const car = currentGalleryCar;
+            document.getElementById('gallery-stock-badge').textContent = 'STOCK: ' + car.stock_no;
+            document.getElementById('gallery-grade-badge').textContent = 'GRED ' + car.grade;
+            document.getElementById('gallery-car-title').textContent = car.model + ' (' + car.year + ') - ' + car.color;
+            document.getElementById('gallery-price').textContent = car.price_display;
+            document.getElementById('gallery-specs').textContent = car.specs;
+
+            // Update main photo
+            const mainImg = document.getElementById('gallery-main-img');
+            mainImg.src = car.images[currentImageIndex];
+
+            // Counter
+            document.getElementById('gallery-counter').textContent = (currentImageIndex + 1) + ' / ' + car.images.length;
+
+            // WhatsApp link
+            const waText = encodeURIComponent(`Salam Sales Advisor, saya sedang tengok gambar stok (${car.stock_no}) ${car.model} harga ${car.price_display}. Boleh saya tanya lebih lanjut?`);
+            document.getElementById('gallery-wa-btn').href = `https://wa.me/${phoneContact}?text=${waText}`;
+
+            // Calc button
+            document.getElementById('gallery-calc-btn').onclick = function() {
+                closeCarGallery();
+                calculateForCar(car.price_rm, car.stock_no + ' - ' + car.model);
+            };
+
+            // Render thumbnails
+            const thumbsContainer = document.getElementById('gallery-thumbnails');
+            thumbsContainer.innerHTML = '';
+            car.images.forEach((imgSrc, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                thumb.className = 'w-14 h-11 object-cover rounded-lg cursor-pointer flex-shrink-0 border-2 transition-all ' + 
+                    (idx === currentImageIndex ? 'border-amber-400 opacity-100 scale-105' : 'border-transparent opacity-50 hover:opacity-100');
+                thumb.onclick = () => {
+                    currentImageIndex = idx;
+                    updateGalleryModal();
+                };
+                thumbsContainer.appendChild(thumb);
+            });
+
+            // Auto scroll active thumbnail into view
+            const activeThumb = thumbsContainer.children[currentImageIndex];
+            if (activeThumb) {
+                activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        function nextGalleryImage() {
+            if (!currentGalleryCar) return;
+            currentImageIndex = (currentImageIndex + 1) % currentGalleryCar.images.length;
+            updateGalleryModal();
+        }
+
+        function prevGalleryImage() {
+            if (!currentGalleryCar) return;
+            currentImageIndex = (currentImageIndex - 1 + currentGalleryCar.images.length) % currentGalleryCar.images.length;
+            updateGalleryModal();
+        }
+
+        // Live Search Cars
+        function searchCars() {
+            const query = (document.getElementById('car-search-input')?.value || '').toLowerCase().trim();
+            const cards = document.querySelectorAll('.car-card');
+            cards.forEach(card => {
+                const searchData = (card.getAttribute('data-search') || '').toLowerCase();
+                if (!query || searchData.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Close on backdrop click
+        document.getElementById('car-gallery-modal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCarGallery();
+            }
+        });
+
+        // Keyboard navigation for gallery
+        window.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('car-gallery-modal');
+            if (modal && !modal.classList.contains('opacity-0')) {
+                if (e.key === 'ArrowRight') nextGalleryImage();
+                if (e.key === 'ArrowLeft') prevGalleryImage();
+                if (e.key === 'Escape') closeCarGallery();
+            }
+        });
+
+        // Function to calculate loan for specific car
+        function calculateForCar(price, name) {
+            if (carPriceSlider) {
+                carPriceSlider.value = price;
+                calculateLoan();
+                const calcSection = document.getElementById('kalkulator');
+                if (calcSection) {
+                    calcSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
     </script>
 
     <!-- Clearance Stock Announcement Popup Modal -->
@@ -1190,5 +1582,66 @@
             </div>
         </div>
     </div>
+
+    <!-- Car Photo Gallery Modal -->
+    <div id="car-gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-900 text-white rounded-3xl max-w-4xl w-full border border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[95vh] transform scale-95 transition-all duration-300" id="gallery-modal-content">
+            
+            <!-- Modal Header -->
+            <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span id="gallery-stock-badge" class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 font-mono text-[10px] font-bold"></span>
+                        <span id="gallery-grade-badge" class="px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-bold"></span>
+                    </div>
+                    <h3 id="gallery-car-title" class="font-display text-sm sm:text-base font-bold text-white mt-1 truncate"></h3>
+                </div>
+                <button type="button" onclick="closeCarGallery()" class="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-colors flex-shrink-0" aria-label="Tutup">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Main Image Stage -->
+            <div class="relative flex-1 bg-black flex items-center justify-center min-h-[280px] sm:min-h-[460px] overflow-hidden group">
+                <img id="gallery-main-img" src="" alt="Car Photo" class="max-h-[60vh] max-w-full object-contain select-none">
+                
+                <!-- Prev / Next Navigation Arrows -->
+                <button type="button" onclick="prevGalleryImage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 hover:bg-amber-500 hover:text-slate-950 text-white flex items-center justify-center text-lg font-bold transition-all shadow-lg border border-slate-700">
+                    ‹
+                </button>
+                <button type="button" onclick="nextGalleryImage()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 hover:bg-amber-500 hover:text-slate-950 text-white flex items-center justify-center text-lg font-bold transition-all shadow-lg border border-slate-700">
+                    ›
+                </button>
+
+                <!-- Photo Counter Overlay -->
+                <div class="absolute bottom-3 left-3 bg-slate-950/85 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-mono border border-slate-800">
+                    <span id="gallery-counter">1 / 1</span>
+                </div>
+            </div>
+
+            <!-- Thumbnails Strip -->
+            <div class="p-3 bg-slate-950 border-t border-slate-800 overflow-x-auto no-scrollbar flex items-center gap-2" id="gallery-thumbnails">
+            </div>
+
+            <!-- Footer Bar with Quick Actions -->
+            <div class="px-5 py-3.5 bg-slate-900 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="text-xs text-slate-300 flex items-center gap-3">
+                    <div>Harga: <span id="gallery-price" class="text-amber-400 font-bold text-sm"></span></div>
+                    <span>•</span>
+                    <div id="gallery-specs" class="text-[11px] text-slate-400 truncate max-w-xs sm:max-w-md"></div>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button type="button" id="gallery-calc-btn" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase tracking-wider transition-all border border-slate-700">
+                        Kira Loan
+                    </button>
+                    <a id="gallery-wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md text-center">
+                        Tanya via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>
