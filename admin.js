@@ -1,4 +1,4 @@
-﻿let currentCars = [];
+let currentCars = [];
 let globalSettings = {};
 let currentTab = 'top-ads';
 let currentEditingCar = null;
@@ -51,20 +51,22 @@ async function initAdminApp() {
     populateSettingsUI();
 }
 
-function switchTab(tabId, btn) {
+function switchTab(tabId) {
     currentTab = tabId;
     ['top-ads', 'inventory', 'settings', 'import-export'].forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.toggle('hidden', t !== tabId);
     });
     document.querySelectorAll('.admin-tab-btn').forEach(b => {
-        b.classList.remove('bg-amber-400', 'text-slate-950', 'font-extrabold');
-        b.classList.add('text-slate-300');
+        const onclickAttr = b.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${tabId}'`)) {
+            b.classList.remove('text-slate-300', 'hover:text-white', 'bg-transparent');
+            b.classList.add('bg-amber-400', 'text-slate-950', 'font-extrabold', 'shadow-sm');
+        } else {
+            b.classList.remove('bg-amber-400', 'text-slate-950', 'font-extrabold', 'shadow-sm');
+            b.classList.add('text-slate-300', 'hover:text-white');
+        }
     });
-    if (btn) {
-        btn.classList.remove('text-slate-300');
-        btn.classList.add('bg-amber-400', 'text-slate-950', 'font-extrabold');
-    }
 }
 
 function updateStatCounters() {
