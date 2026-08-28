@@ -1038,6 +1038,8 @@
     <!-- JavaScript for Calculator and Filtering -->
     
     <!-- JavaScript Data and Functions for Dynamic Cars Catalog & Photo Gallery -->
+    
+    <!-- JavaScript Data and Functions for Dynamic Cars Catalog & Photo Gallery -->
     <script>
         const allCarsData = [
   {
@@ -1843,106 +1845,116 @@
   }
 ];
 
+        const ITEMS_PER_PAGE = 6;
+        let currentPage = 1;
         let currentCategory = 'all';
-        let isGridMode = false;
+        let currentFilteredCars = [...allCarsData];
         let currentGalleryCar = null;
         let currentImageIndex = 0;
 
-        function renderCarCards(carsToRender) {
-            const track = document.getElementById('cars-track');
-            if (!track) return;
-            
-            if (!carsToRender || carsToRender.length === 0) {
-                track.innerHTML = `
-                    <div class="w-full py-12 text-center text-slate-500 text-sm bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+        function renderCarCards() {
+            const grid = document.getElementById('cars-grid');
+            if (!grid) return;
+
+            const totalItems = currentFilteredCars.length;
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+            const pageItems = currentFilteredCars.slice(startIndex, endIndex);
+
+            if (pageItems.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-500 text-sm bg-slate-50 rounded-2xl border border-dashed border-slate-300">
                         Tiada unit kenderaan ditemui untuk carian atau kategori ini.
                     </div>
                 `;
-                updateScrollBadge(0, 0);
+                renderPagination(0, 0, 0);
                 return;
             }
 
-            track.innerHTML = carsToRender.map(car => {
+            grid.innerHTML = pageItems.map(car => {
                 const coverImg = car.thumbnail || (car.images && car.images[0]) || 'public/cars/placeholder.jpg';
                 const imgCount = car.image_count || (car.images ? car.images.length : 0);
+                const srcLabel = car.source_label || 'Local Stock';
                 const waUrl = `https://wa.me/60108118559?text=${encodeURIComponent(`Salam Sales Advisor, saya berminat dengan stok (${car.stock_no}) ${car.model} harga ${car.price_display}. Boleh saya dapatkan maklumat lanjut dan semakan loan?`)}`;
-                
-                const cardWidthClass = isGridMode 
-                    ? 'w-full' 
-                    : 'w-[85vw] sm:w-[320px] md:w-[280px] lg:w-[calc(20%-16px)] min-w-[260px] flex-shrink-0 snap-start';
 
                 return `
-                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between ${cardWidthClass} border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all">
+                <div class="car-card custom-card rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-200/90 bg-white shadow-sm hover:shadow-md transition-all">
                     <!-- Image Header with Click to Gallery -->
                     <div class="relative group cursor-pointer overflow-hidden bg-slate-900 aspect-[16/10]" onclick="openCarGallery('${car.code}')">
                         <img src="${coverImg}" alt="${car.model}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='public/cars/placeholder.jpg'">
                         
-                        <div class="absolute top-2.5 left-2.5 flex gap-1 flex-wrap z-10">
-                            <span class="px-2 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[9px] sm:text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: ${car.stock_no}</span>
+                        <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-amber-300 font-mono text-[10px] font-bold tracking-wider border border-amber-500/30">STOCK: ${car.stock_no}</span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-700/90 backdrop-blur-md text-white text-[10px] font-bold border border-emerald-500/30">READY STOCK</span>
                         </div>
-                        <div class="absolute top-2.5 right-2.5 z-10">
-                            <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-mono text-[10px] font-extrabold shadow-md">GRED ${car.grade || '4.5A'}</span>
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[11px] font-extrabold shadow-md">GRED ${car.grade || '4.5A'}</span>
                         </div>
-                        <div class="absolute bottom-2.5 right-2.5 z-10">
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950/85 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
-                                📷 ${imgCount} Foto
+                        <div class="absolute bottom-3 right-3 z-10">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 border border-slate-700 shadow-sm">
+                                📷 ${imgCount} Foto (${srcLabel})
                             </span>
                         </div>
                         <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="text-slate-950 text-[11px] font-bold uppercase tracking-wider bg-amber-400 px-3 py-1.5 rounded-lg shadow-lg">
-                                Buka Galeri
+                            <span class="text-slate-950 text-xs font-bold uppercase tracking-wider bg-amber-400 px-4 py-2 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                Buka Galeri (${imgCount} Foto)
                             </span>
                         </div>
                     </div>
 
                     <!-- Details Body -->
-                    <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
                         <div>
                             <div>
-                                <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider">${car.brand} • ${car.year}</span>
-                                <h3 class="text-xs sm:text-sm font-bold text-slate-900 mt-0.5 leading-snug line-clamp-1" title="${car.model}">${car.model}</h3>
+                                <span class="text-[10px] sm:text-[11px] font-bold text-amber-700 uppercase tracking-wider">${car.brand} • ${car.year}</span>
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 leading-snug line-clamp-1" title="${car.model}">${car.model}</h3>
                             </div>
-                            <div class="text-[11px] text-slate-500 mt-1 font-medium flex items-center gap-1.5">
-                                <span>${car.color || 'Solid'}</span>
+                            <div class="text-xs text-slate-500 mt-1 font-medium flex items-center gap-2">
+                                <span>Warna ${car.color || 'Solid'}</span>
                                 <span>•</span>
                                 <span class="truncate">${car.mileage || 'Perbatuan Rendah'}</span>
                             </div>
 
                             <!-- Specs Grid -->
-                            <div class="grid grid-cols-2 gap-1.5 text-[10px] mt-2.5">
-                                <div class="p-1.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                    <span class="text-slate-500 block text-[9px]">No. Casis:</span>
-                                    <span class="text-slate-900 font-mono font-semibold text-[10px] truncate block" title="${car.chassis}">${car.chassis || '-'}</span>
+                            <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">No. Casis:</span>
+                                    <span class="text-slate-900 font-mono font-semibold text-[11px] truncate block" title="${car.chassis}">${car.chassis || '-'}</span>
                                 </div>
-                                <div class="p-1.5 rounded-lg bg-slate-50 border border-slate-200/80">
-                                    <span class="text-slate-500 block text-[9px]">Gred:</span>
-                                    <span class="text-slate-900 font-semibold text-[10px] truncate block">Gred ${car.grade} Lelong</span>
+                                <div class="p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                                    <span class="text-slate-500 block text-[10px] sm:text-[11px]">Gred Kenderaan:</span>
+                                    <span class="text-slate-900 font-semibold text-xs truncate block">Gred ${car.grade} Lelong</span>
                                 </div>
                             </div>
 
-                            <div class="mt-2 p-2 rounded-lg bg-slate-50 border border-slate-200/70 text-[10px] text-slate-600 line-clamp-2" title="${car.specs}">
-                                ${car.specs || 'Spesifikasi import penuh berkualiti tinggi.'}
+                            <div class="mt-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 line-clamp-2" title="${car.specs}">
+                                <span class="font-bold text-slate-800">Spesifikasi:</span> ${car.specs || 'Spesifikasi import berkualiti tinggi.'}
                             </div>
                         </div>
 
                         <!-- Pricing & Actions -->
-                        <div class="pt-2.5 border-t border-slate-100 space-y-2">
-                            <div class="flex items-center justify-between gap-1">
+                        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                            <div class="flex items-center justify-between gap-2">
                                 <div>
-                                    <span class="text-[9px] text-slate-500 block uppercase font-medium">Harga:</span>
-                                    <span class="text-xs sm:text-sm font-bold text-slate-900">${car.price_display}</span>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Harga Tawaran:</span>
+                                    <span class="text-base sm:text-lg font-bold text-slate-900">${car.price_display}</span>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[9px] text-slate-500 block uppercase font-medium">Bulanan:</span>
-                                    <span class="text-[11px] sm:text-xs font-bold text-amber-700">${car.monthly_estimate}</span>
+                                    <span class="text-[10px] text-slate-500 block uppercase font-medium">Anggaran Bulanan:</span>
+                                    <span class="text-xs sm:text-sm font-bold text-amber-700">${car.monthly_estimate}</span>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-1.5">
-                                <button type="button" onclick="calculateForCar(${car.price_rm || 150000}, '${car.stock_no} - ${car.model}')" class="py-2 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-[10px] font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="calculateForCar(${car.price_rm || 150000}, '${car.stock_no} - ${car.model}')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all text-center border border-slate-200">
                                     Kira Loan
                                 </button>
-                                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-2 rounded-lg bg-brand-emerald hover:bg-brand-emeraldHover text-white text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
+                                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm text-center truncate">
                                     WhatsApp
                                 </a>
                             </div>
@@ -1952,11 +1964,67 @@
                 `;
             }).join('');
 
-            updateScrollBadge(1, carsToRender.length);
+            renderPagination(startIndex + 1, endIndex, totalItems);
+        }
+
+        function renderPagination(start, end, total) {
+            const info = document.getElementById('pagination-info');
+            const controls = document.getElementById('pagination-controls');
+            if (!info || !controls) return;
+
+            if (total === 0) {
+                info.innerText = 'Tiada padanan ditemui';
+                controls.innerHTML = '';
+                return;
+            }
+
+            info.innerText = `Menunjukkan ${start} - ${end} daripada ${total} unit kenderaan (Muka Surat ${currentPage} dari ${Math.ceil(total / ITEMS_PER_PAGE)})`;
+
+            const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+            let btnHtml = '';
+
+            // Prev Button
+            btnHtml += `
+                <button type="button" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled class="px-3 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-50 cursor-not-allowed border border-slate-200"' : 'class="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 transition-all shadow-sm"'}>
+                    ‹ Sebelumnya
+                </button>
+            `;
+
+            // Page Number Buttons
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    btnHtml += `<button type="button" class="w-9 h-9 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-sm">${i}</button>`;
+                } else {
+                    btnHtml += `<button type="button" onclick="goToPage(${i})" class="w-9 h-9 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 transition-all">${i}</button>`;
+                }
+            }
+
+            // Next Button
+            btnHtml += `
+                <button type="button" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled class="px-3 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-50 cursor-not-allowed border border-slate-200"' : 'class="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 transition-all shadow-sm"'}>
+                    Seterusnya ›
+                </button>
+            `;
+
+            controls.innerHTML = btnHtml;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(currentFilteredCars.length / ITEMS_PER_PAGE);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderCarCards();
+
+            // Smooth scroll to top of catalog
+            const stokSec = document.getElementById('stok');
+            if (stokSec) {
+                stokSec.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
         function filterCategory(cat, btn) {
             currentCategory = cat;
+            currentPage = 1;
             document.querySelectorAll('#filter-tabs .filter-btn').forEach(b => {
                 b.classList.remove('bg-slate-900', 'text-white', 'shadow-sm', 'active');
                 b.classList.add('bg-slate-100', 'text-slate-700');
@@ -1970,7 +2038,8 @@
 
         function filterAndRenderCars() {
             const query = (document.getElementById('car-search-input')?.value || '').toLowerCase().trim();
-            const filtered = allCarsData.filter(car => {
+            currentPage = 1;
+            currentFilteredCars = allCarsData.filter(car => {
                 const matchCat = (currentCategory === 'all') 
                     || (car.category && car.category.toLowerCase() === currentCategory.toLowerCase())
                     || (car.brand && car.brand.toLowerCase() === currentCategory.toLowerCase());
@@ -1982,42 +2051,12 @@
                 return searchStr.includes(query);
             });
 
-            renderCarCards(filtered);
-        }
-
-        function scrollCarsTrack(direction) {
-            const track = document.getElementById('cars-track');
-            if (!track) return;
-            const scrollAmount = track.clientWidth * 0.85;
-            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-        }
-
-        function updateScrollBadge(start, total) {
-            const badge = document.getElementById('scroll-counter-badge');
+            const badge = document.getElementById('total-units-badge');
             if (badge) {
-                badge.innerText = total > 5 ? `1 - 5 / ${total}` : `${total} Unit`;
+                badge.innerText = `Jumlah: ${currentFilteredCars.length} Unit`;
             }
-        }
 
-        function toggleLayoutMode() {
-            isGridMode = !isGridMode;
-            const track = document.getElementById('cars-track');
-            const layoutIcon = document.getElementById('layout-icon');
-            const layoutText = document.getElementById('layout-text');
-            const carouselControls = document.getElementById('carousel-controls');
-
-            if (isGridMode) {
-                track.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 pt-2 pb-6';
-                if (layoutIcon) layoutIcon.innerText = '↔️';
-                if (layoutText) layoutText.innerText = 'Paparan 5 Kad';
-                if (carouselControls) carouselControls.style.display = 'none';
-            } else {
-                track.className = 'flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 pt-2 no-scrollbar px-1';
-                if (layoutIcon) layoutIcon.innerText = '⊞';
-                if (layoutText) layoutText.innerText = 'Grid Penuh';
-                if (carouselControls) carouselControls.style.display = 'flex';
-            }
-            filterAndRenderCars();
+            renderCarCards();
         }
 
         // Photo Gallery Modal Handlers
@@ -2147,9 +2186,10 @@
 
         // Initialize cars render on page load
         document.addEventListener('DOMContentLoaded', function() {
-            renderCarCards(allCarsData);
+            renderCarCards();
         });
     </script>
+
 
 
     <!-- Clearance Stock Announcement Popup Modal -->
