@@ -268,9 +268,12 @@
     "specs": "PROTECTION FILM, ADAPTIVE HEADLIGHTS, CARBON FIBER INNER DOOR, HANDLES, CARBON FIBER DRIVING ZONE, CARBON FIBER CENTER BRIDGE, CARBON FIBER DASHBOARD, 20-INCH FORGED WHEELS, FRONT SUSPENSION LIFTER, EMBROIDERED PRANCING HORSE, CABALLINO RAMPANTE ON HEADRESTS, BLACK SPORTS TAILPIPES, PASSENGER DISPLAY, TDF-DESIGN DIAMOND BLACK WHEELS, HIFI AUDIO SYSTEM, OWNER'S MANUAL, WARRANY BOOKLET, SPARE KEY (2,370 KM) GRADE: 5A",
     "status": "Ready Stock",
     "source_label": "Local Photos",
-    "thumbnail": "",
-    "images": [],
-    "image_count": 0,
+    "thumbnail": "public/cars/EW_517/ferrari_812_gts_rear.jpg",
+    "images": [
+      "public/cars/EW_517/ferrari_812_gts_rear.jpg",
+      "public/cars/EW_517/ferrari_812_gts_yellow.jpg"
+    ],
+    "image_count": 2,
     "slug": "ferrari-ferrari-812-gts-ew-517",
     "detail_url": "stok/ferrari-ferrari-812-gts-ew-517.html",
     "price_display": "Anggaran OTR dari RM 2,370,300*",
