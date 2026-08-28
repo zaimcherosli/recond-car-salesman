@@ -25,36 +25,40 @@
             }
         }
     </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
-        <!-- Top Admin Header -->
-    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl">
+<body class="bg-slate-100 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Top Admin Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="h-16 sm:h-20 flex items-center justify-between gap-3">
                 
                 <!-- Brand Title & Tag -->
-                <div class="flex items-center gap-2.5 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
                     <a href="index.html" class="flex flex-col min-w-0 group">
                         <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse flex-shrink-0"></span>
-                            <span class="font-display text-sm sm:text-lg lg:text-xl font-bold text-white tracking-wide uppercase whitespace-nowrap">PRESTIGE AUTO</span>
-                            <span class="px-2 py-0.5 rounded-md bg-amber-400/10 text-amber-300 border border-amber-400/25 text-[10px] font-mono font-bold tracking-wider whitespace-nowrap">ADMIN v2.0</span>
+                            <span class="font-display text-base sm:text-lg lg:text-xl font-bold text-slate-950 tracking-wider uppercase whitespace-nowrap">PRESTIGE AUTO</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-mono font-bold tracking-wider whitespace-nowrap">ADMIN v2.0</span>
                         </div>
-                        <span class="text-[10px] text-slate-400 font-medium truncate mt-0.5">Sistem Kawalan Margin & Risikan Pasaran</span>
+                        <span class="text-[10px] text-slate-500 font-medium truncate mt-0.5">Sistem Kawalan Margin & Risikan Pasaran</span>
                     </a>
                 </div>
 
                 <!-- Desktop Navigation Tabs -->
-                <nav class="hidden md:flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-bold tracking-wider">
-                    <button onclick="switchTab('top-ads')" class="admin-tab-btn px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-extrabold shadow-sm transition-all whitespace-nowrap">Top Iklan Ads</button>
-                    <button onclick="switchTab('inventory')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white transition-all whitespace-nowrap">Stok & Margin</button>
-                    <button onclick="switchTab('settings')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white transition-all whitespace-nowrap">Tetapan OTR</button>
-                    <button onclick="switchTab('import-export')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white transition-all whitespace-nowrap">CSV Data</button>
+                <nav class="hidden md:flex items-center gap-1.5 p-1 bg-slate-100 rounded-2xl border border-slate-200 text-xs font-bold tracking-wider">
+                    <button onclick="switchTab('top-ads')" class="admin-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-white font-extrabold shadow-sm transition-all whitespace-nowrap">Top Iklan Ads</button>
+                    <button onclick="switchTab('inventory')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">Stok & Margin</button>
+                    <button onclick="switchTab('settings')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">Tetapan OTR</button>
+                    <button onclick="switchTab('import-export')" class="admin-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">CSV Data</button>
                 </nav>
 
                 <!-- Right Quick Actions -->
                 <div class="flex items-center gap-2 flex-shrink-0">
-                    <a href="katalog.html" target="_blank" class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold tracking-wider border border-slate-700/80 transition-all flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+                    <a href="katalog.html" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold tracking-wider transition-all flex items-center gap-1.5 whitespace-nowrap shadow-sm">
                         <span>Web Awam</span>
                         <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
@@ -64,76 +68,80 @@
 
             <!-- Mobile Segmented Navigation Tabs -->
             <div class="md:hidden pb-3 pt-1">
-                <div class="flex items-center gap-1.5 p-1 bg-slate-900 rounded-xl border border-slate-800 overflow-x-auto no-scrollbar">
-                    <button onclick="switchTab('top-ads')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg bg-amber-400 text-slate-950 font-extrabold text-xs transition-all text-center">Top Ads</button>
-                    <button onclick="switchTab('inventory')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-bold transition-all text-center">Stok & Margin</button>
-                    <button onclick="switchTab('settings')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-bold transition-all text-center">Tetapan</button>
-                    <button onclick="switchTab('import-export')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-bold transition-all text-center">CSV</button>
+                <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 overflow-x-auto no-scrollbar">
+                    <button onclick="switchTab('top-ads')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg bg-slate-900 text-white font-extrabold text-xs transition-all text-center">Top Ads</button>
+                    <button onclick="switchTab('inventory')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-bold transition-all text-center">Stok & Margin</button>
+                    <button onclick="switchTab('settings')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-bold transition-all text-center">Tetapan</button>
+                    <button onclick="switchTab('import-export')" class="admin-tab-btn flex-1 min-w-max px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-bold transition-all text-center">CSV</button>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Stat Metric Cards Bar -->
-    <div class="bg-slate-900/40 border-b border-slate-800/80 py-5">
+    <div class="bg-white border-b border-slate-200/80 py-5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 truncate">Total Stok PDF</span>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 truncate">Total Stok PDF</span>
                 <div class="flex items-baseline justify-between gap-1 mt-2">
-                    <span id="stat-total-cars" class="text-xl sm:text-2xl font-bold font-display text-white">0</span>
+                    <span id="stat-total-cars" class="text-xl sm:text-2xl font-bold font-display text-slate-950">0</span>
                     <span class="text-[10px] text-slate-500 font-mono">Unit</span>
                 </div>
             </div>
 
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 truncate">Risikan Segar (≤7h)</span>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 truncate">Risikan Segar (&le;7h)</span>
                 <div class="flex items-baseline justify-between gap-1 mt-2">
-                    <span id="stat-fresh-cars" class="text-xl sm:text-2xl font-bold font-display text-emerald-400">0</span>
-                    <span class="text-[10px] text-emerald-500/80 font-mono">Aktif</span>
+                    <span id="stat-fresh-cars" class="text-xl sm:text-2xl font-bold font-display text-emerald-700">0</span>
+                    <span class="text-[10px] text-emerald-600 font-mono font-medium">Aktif</span>
                 </div>
             </div>
 
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 truncate">Top Ads (Score ≥ 8.5)</span>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700 truncate">Top Ads (Score &ge; 8.5)</span>
                 <div class="flex items-baseline justify-between gap-1 mt-2">
-                    <span id="stat-top-ads-count" class="text-xl sm:text-2xl font-bold font-display text-amber-400">0</span>
-                    <span class="text-[10px] text-amber-500/80 font-mono">Pilihan</span>
+                    <span id="stat-top-ads-count" class="text-xl sm:text-2xl font-bold font-display text-amber-700">0</span>
+                    <span class="text-[10px] text-amber-600 font-mono font-medium">Pilihan</span>
                 </div>
             </div>
 
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 truncate">Perlu Risikan</span>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-rose-700 truncate">Perlu Risikan</span>
                 <div class="flex items-baseline justify-between gap-1 mt-2">
-                    <span id="stat-unresearched" class="text-xl sm:text-2xl font-bold font-display text-rose-400">0</span>
-                    <span class="text-[10px] text-rose-500/80 font-mono">Belum Risik</span>
+                    <span id="stat-unresearched" class="text-xl sm:text-2xl font-bold font-display text-rose-700">0</span>
+                    <span class="text-[10px] text-rose-600 font-mono font-medium">Belum Risik</span>
                 </div>
             </div>
 
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm col-span-2 sm:col-span-2 lg:col-span-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 truncate">Potensi Spread Pasaran</span>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm col-span-2 sm:col-span-2 lg:col-span-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-700 truncate">Potensi Spread Pasaran</span>
                 <div class="flex items-baseline justify-between gap-1 mt-2">
-                    <span id="stat-total-spread" class="text-lg sm:text-xl font-bold font-display text-amber-300 truncate">RM 0</span>
-                    <span class="text-[10px] text-amber-500/80 font-mono">Total</span>
+                    <span id="stat-total-spread" class="text-lg sm:text-xl font-bold font-display text-slate-950 truncate">RM 0</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Total</span>
                 </div>
             </div>
 
         </div>
     </div>
 
+    <!-- Main Dynamic Admin Content -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: TOP CARS TO ADVERTISE -->
         <section id="tab-top-ads" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Meta & TikTok Ads Ready</span>
-                        <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-mono text-[10px] font-extrabold">Algoritma Ad Score</span>
+                        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Meta & TikTok Ads Ready</span>
+                        <span class="px-2 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold">Algoritma Ad Score</span>
                     </div>
-                    <h1 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Top Stok Untuk Dijalankan Iklan Berbayar</h1>
-                    <p class="text-xs sm:text-sm text-slate-400">Disusun mengikut margin untung (market spread), permintaan model (demand score), dan kelebihan harga OTR berbanding median pasaran semasa.</p>
+                    <h1 class="font-display text-2xl sm:text-3xl font-bold text-slate-950 mt-1">Top Stok Untuk Dijalankan Iklan Berbayar</h1>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Disusun mengikut margin untung (market spread), permintaan model (demand score), dan kelebihan harga OTR berbanding median pasaran semasa.</p>
                 </div>
+
                 <div class="flex items-center gap-2">
-                    <select id="top-ads-brand-filter" onchange="renderTopAds()" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-400">
+                    <select id="top-ads-brand-filter" onchange="renderTopAds()" class="px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-800 focus:outline-none focus:border-slate-900">
                         <option value="all">Semua Jenama</option>
                         <option value="Honda">Honda</option>
                         <option value="Bmw">BMW</option>
@@ -142,56 +150,63 @@
                     </select>
                 </div>
             </div>
+
             <div id="top-ads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <!-- TAB 2: FULL INVENTORY & PRICING TABLE -->
         <section id="tab-inventory" class="hidden space-y-6">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <div>
-                    <h2 class="font-display text-2xl font-bold text-white">Senarai Penuh Stok & Risikan Margin</h2>
-                    <p class="text-xs text-slate-400">Paparan data komersial dalaman (Dealer Body Price, Est OTR, Market Spread, Cadangan Komisen & Skor Iklan).</p>
+                    <h2 class="font-display text-2xl font-bold text-slate-950">Senarai Penuh Stok & Risikan Margin</h2>
+                    <p class="text-xs text-slate-600 mt-1">Paparan data komersial dalaman (Dealer Body Price, Est OTR, Market Spread, Cadangan Komisen & Skor Iklan).</p>
                 </div>
+
                 <div class="flex items-center gap-2 flex-wrap">
-                    <button onclick="exportCSV()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1.5">
+                    <button onclick="exportCSV()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
                         <span>Eksport CSV</span>
                     </button>
                 </div>
             </div>
 
-            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-3">
+            <!-- Filters Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                    <div class="relative">
-                        <input type="text" id="inv-search" onkeyup="filterInventoryTable()" placeholder="Cari Model, Stock No, Casis..." class="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
-                        <span class="absolute left-3 top-2.5 text-slate-500 text-xs">🔍</span>
+                    <div>
+                        <input type="text" id="inv-search" onkeyup="filterInventoryTable()" placeholder="Cari Model, Stock No, Casis..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900">
                     </div>
-                    <select id="inv-filter-brand" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+
+                    <select id="inv-filter-brand" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-700 focus:outline-none focus:border-slate-900">
                         <option value="all">Semua Jenama</option>
                         <option value="Honda">Honda</option>
                         <option value="Bmw">BMW</option>
                         <option value="Ferrari">Ferrari</option>
                         <option value="Daihatsu">Daihatsu</option>
                     </select>
-                    <select id="inv-filter-status" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+
+                    <select id="inv-filter-status" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-700 focus:outline-none focus:border-slate-900">
                         <option value="all">Semua Status Risikan</option>
-                        <option value="HIGH_PRIORITY">High Priority (Ad Score >= 9.0)</option>
-                        <option value="GOOD_DEAL">Good Deal (Spread >= RM3k)</option>
-                        <option value="LOW_MARGIN">Low Margin (< RM2k)</option>
+                        <option value="HIGH_PRIORITY">High Priority (Ad Score &ge; 9.0)</option>
+                        <option value="GOOD_DEAL">Good Deal (Spread &ge; RM3k)</option>
+                        <option value="LOW_MARGIN">Low Margin (&lt; RM2k)</option>
                         <option value="UNRESEARCHED">Belum Diselidik (Unresearched)</option>
                     </select>
-                    <select id="inv-filter-freshness" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-slate-300 focus:outline-none focus:border-amber-400">
+
+                    <select id="inv-filter-freshness" onchange="filterInventoryTable()" class="px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-700 focus:outline-none focus:border-slate-900">
                         <option value="all">Semua Kesegaran Data</option>
-                        <option value="FRESH">Segar (<= 7 Hari)</option>
+                        <option value="FRESH">Segar (&le; 7 Hari)</option>
                         <option value="MODERATE">Sederhana (8-14 Hari)</option>
-                        <option value="STALE">Lapuk / Perlu Semak (> 14 Hari)</option>
+                        <option value="STALE">Lapuk / Perlu Semak (&gt; 14 Hari)</option>
                     </select>
                 </div>
             </div>
 
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+            <!-- Inventory Data Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border-collapse">
                         <thead>
-                            <tr class="bg-slate-950 text-slate-400 font-bold border-b border-slate-800 uppercase tracking-wider text-[10px]">
+                            <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider text-[10px]">
                                 <th class="p-3.5">Stok / Model</th>
                                 <th class="p-3.5">Body Price</th>
                                 <th class="p-3.5">Est. OTR (55% / 0%)</th>
@@ -204,184 +219,200 @@
                                 <th class="p-3.5 text-right">Tindakan</th>
                             </tr>
                         </thead>
-                        <tbody id="inventory-table-body" class="divide-y divide-slate-800/80 font-mono text-slate-200"></tbody>
+                        <tbody id="inventory-table-body" class="divide-y divide-slate-100 font-mono text-slate-900"></tbody>
                     </table>
                 </div>
-                <div class="p-4 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+                
+                <!-- Table Pagination -->
+                <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
                     <span id="inv-table-info">Menunjukkan 0 rekod</span>
                     <div class="flex items-center gap-1" id="inv-table-pagination"></div>
                 </div>
             </div>
         </section>
 
+        <!-- TAB 3: GLOBAL PRICING SETTINGS -->
         <section id="tab-settings" class="hidden space-y-6">
-            <div class="max-w-3xl space-y-2">
-                <h2 class="font-display text-2xl font-bold text-white">Tetapan Global Engine Penetapan Harga</h2>
-                <p class="text-xs text-slate-400">Ubah formula kos OTR, buffer tawar-menawar, dan peraturan komisen tanpa perlu mengubah kod sumber.</p>
+            <div class="max-w-3xl space-y-2 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h2 class="font-display text-2xl font-bold text-slate-950">Tetapan Global Engine Penetapan Harga</h2>
+                <p class="text-xs text-slate-600">Ubah formula kos OTR, buffer tawar-menawar, dan peraturan komisen tanpa perlu mengubah kod sumber.</p>
             </div>
-            <div class="max-w-3xl bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+
+            <div class="max-w-3xl bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-sm">
+                
                 <div class="space-y-4">
-                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">1. Kos Anggaran OTR Default (Insurans + Cukai Jalan + Pendaftaran)</h3>
+                    <h3 class="font-display text-base font-bold text-slate-900 uppercase tracking-wider text-xs">1. Kos Anggaran OTR Default (Insurans + Cukai Jalan + Pendaftaran)</h3>
+                    
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
                         <div>
-                            <label class="block font-bold text-slate-300 mb-1.5">Tambahan OTR (55% NCD):</label>
+                            <label class="block font-bold text-slate-700 mb-1.5">Tambahan OTR (55% NCD):</label>
                             <div class="relative">
                                 <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
-                                <input type="number" id="setting-otr-55" value="7000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                                <input type="number" id="setting-otr-55" value="7000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                             </div>
                             <span class="text-[10px] text-slate-500 mt-1 block">Default: RM 7,000</span>
                         </div>
+
                         <div>
-                            <label class="block font-bold text-slate-300 mb-1.5">Tambahan OTR (0% NCD):</label>
+                            <label class="block font-bold text-slate-700 mb-1.5">Tambahan OTR (0% NCD):</label>
                             <div class="relative">
                                 <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
-                                <input type="number" id="setting-otr-0" value="10000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                                <input type="number" id="setting-otr-0" value="10000" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                             </div>
                             <span class="text-[10px] text-slate-500 mt-1 block">Default: RM 10,000</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-6 border-t border-slate-800 space-y-4">
-                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">2. Buffer Tawar-Menawar (Negotiation Buffer)</h3>
+                <div class="pt-6 border-t border-slate-200 space-y-4">
+                    <h3 class="font-display text-base font-bold text-slate-900 uppercase tracking-wider text-xs">2. Buffer Tawar-Menawar (Negotiation Buffer)</h3>
+                    
                     <div class="max-w-sm font-mono text-xs">
-                        <label class="block font-bold text-slate-300 mb-1.5">Default Buffer Diskaun:</label>
+                        <label class="block font-bold text-slate-700 mb-1.5">Default Buffer Diskaun:</label>
                         <div class="relative">
                             <span class="absolute left-3 top-2.5 text-slate-400 font-bold">RM</span>
-                            <input type="number" id="setting-buffer" value="1800" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold focus:border-amber-400 focus:outline-none">
+                            <input type="number" id="setting-buffer" value="1800" class="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-1 block">Buffer untuk jurujual bagi diskaun semasa closing tanpa makan komisen teras.</span>
                     </div>
                 </div>
 
-                <div class="pt-6 border-t border-slate-800 space-y-4">
-                    <h3 class="font-display text-base font-bold text-amber-400 uppercase tracking-wider text-xs">3. Had Hari Kesegaran Data Risikan (Freshness Thresholds)</h3>
+                <div class="pt-6 border-t border-slate-200 space-y-4">
+                    <h3 class="font-display text-base font-bold text-slate-900 uppercase tracking-wider text-xs">3. Had Hari Kesegaran Data Risikan (Freshness Thresholds)</h3>
+                    
                     <div class="grid grid-cols-2 gap-4 font-mono text-xs max-w-md">
                         <div>
-                            <label class="block font-bold text-slate-300 mb-1">Hijau (Segar):</label>
-                            <input type="number" id="setting-fresh-days" value="7" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
-                            <span class="text-[10px] text-slate-500"><= 7 hari</span>
+                            <label class="block font-bold text-slate-700 mb-1">Hijau (Segar):</label>
+                            <input type="number" id="setting-fresh-days" value="7" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold">
+                            <span class="text-[10px] text-slate-500">&le; 7 hari</span>
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-300 mb-1">Kuning (Sederhana):</label>
-                            <input type="number" id="setting-mod-days" value="14" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                            <label class="block font-bold text-slate-700 mb-1">Kuning (Sederhana):</label>
+                            <input type="number" id="setting-mod-days" value="14" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold">
                             <span class="text-[10px] text-slate-500">8 - 14 hari</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-6 border-t border-slate-800 flex items-center justify-between">
-                    <button onclick="resetDefaultSettings()" class="text-xs text-slate-400 hover:text-white underline">Kembalikan ke Default</button>
-                    <button onclick="saveGlobalSettings()" class="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md">
+                <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+                    <button onclick="resetDefaultSettings()" class="text-xs text-slate-500 hover:text-slate-900 underline">Kembalikan ke Default</button>
+                    <button onclick="saveGlobalSettings()" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all">
                         Simpan Tetapan Engine
                     </button>
                 </div>
+
             </div>
         </section>
 
+        <!-- TAB 4: IMPORT / EXPORT CSV -->
         <section id="tab-import-export" class="hidden space-y-6">
-            <div class="max-w-3xl space-y-2">
-                <h2 class="font-display text-2xl font-bold text-white">Import & Eksport Risikan Pasaran (CSV / Excel)</h2>
-                <p class="text-xs text-slate-400">Muat naik fail CSV untuk mengemas kini harga pasaran secara pukal.</p>
+            <div class="max-w-3xl space-y-2 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <h2 class="font-display text-2xl font-bold text-slate-950">Import & Eksport Risikan Pasaran (CSV / Excel)</h2>
+                <p class="text-xs text-slate-600">Muat naik fail CSV untuk mengemas kini harga pasaran secara pukal.</p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-                <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
-                    <h3 class="font-display text-base font-bold text-white">1. Muat Turun Data Semasa</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">Eksport senarai stok semasa bersama maklumat penyelidikan pasaran ke dalam format fail CSV yang boleh dibuka di Microsoft Excel atau Google Sheets.</p>
-                    <button onclick="exportCSV()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider border border-slate-700 transition-all flex items-center justify-center gap-2">
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-4 shadow-sm">
+                    <h3 class="font-display text-base font-bold text-slate-950">1. Muat Turun Data Semasa</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Eksport senarai stok semasa bersama maklumat penyelidikan pasaran ke dalam format fail CSV yang boleh dibuka di Microsoft Excel atau Google Sheets.</p>
+                    <button onclick="exportCSV()" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
                         <span>Muat Turun CSV Semasa</span>
                     </button>
                 </div>
             </div>
         </section>
+
     </main>
 
-    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+    <!-- EDIT / OVERRIDE MODAL -->
+    <div id="edit-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8 text-slate-900">
             <div class="flex items-start justify-between">
                 <div>
-                    <span id="modal-stock-no" class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">STOCK: --</span>
-                    <h3 id="modal-car-title" class="font-display text-lg sm:text-xl font-bold text-white mt-0.5">Model Kenderaan</h3>
-                    <div id="modal-body-price-text" class="text-xs font-mono text-slate-400 mt-1">Body Price: RM 0</div>
+                    <span id="modal-stock-no" class="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest">STOCK: --</span>
+                    <h3 id="modal-car-title" class="font-display text-lg sm:text-xl font-bold text-slate-950 mt-0.5">Model Kenderaan</h3>
+                    <div id="modal-body-price-text" class="text-xs font-mono text-slate-500 mt-1">Body Price: RM 0</div>
                 </div>
-                <button onclick="closeEditModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center font-bold">✕</button>
+                <button onclick="closeEditModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 flex items-center justify-center font-bold">✕</button>
             </div>
 
-            <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+            <!-- Override Toggle -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                 <div>
-                    <span class="text-xs font-bold text-white block">Mod Pengiraan:</span>
-                    <span id="modal-override-label" class="text-[11px] text-emerald-400 font-medium">Auto Compute (Mengikut Formula Engine)</span>
+                    <span class="text-xs font-bold text-slate-900 block">Mod Pengiraan:</span>
+                    <span id="modal-override-label" class="text-[11px] text-emerald-700 font-medium">Auto Compute (Formula Automatik)</span>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="modal-override-checkbox" onchange="toggleModalOverride(this.checked)" class="sr-only peer">
-                    <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-400"></div>
+                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-900"></div>
                 </label>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
                 <div>
-                    <label class="block text-slate-400 mb-1">Market Low (RM):</label>
-                    <input type="number" id="modal-market-low" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                    <label class="block text-slate-600 mb-1">Market Low (RM):</label>
+                    <input type="number" id="modal-market-low" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-amber-400 font-bold mb-1">Market Median (RM):</label>
-                    <input type="number" id="modal-market-median" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-amber-500/50 text-white font-bold focus:border-amber-400">
+                    <label class="block text-slate-900 font-bold mb-1">Market Median (RM):</label>
+                    <input type="number" id="modal-market-median" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-50 border border-amber-500/80 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-slate-400 mb-1">Market High (RM):</label>
-                    <input type="number" id="modal-market-high" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                    <label class="block text-slate-600 mb-1">Market High (RM):</label>
+                    <input type="number" id="modal-market-high" oninput="recalcModalLive()" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
                 <div>
-                    <label class="block text-slate-400 mb-1">Tarikh Semakan Pasaran:</label>
-                    <input type="date" id="modal-market-date" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">
+                    <label class="block text-slate-600 mb-1">Tarikh Semakan Pasaran:</label>
+                    <input type="date" id="modal-market-date" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-slate-400 mb-1">Sumber Semakan (cth: Mudah, Carlist):</label>
-                    <input type="text" id="modal-market-sources" placeholder="Mudah.my, Carlist" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white">
+                    <label class="block text-slate-600 mb-1">Sumber Semakan (cth: Mudah, Carlist):</label>
+                    <input type="text" id="modal-market-sources" placeholder="Mudah.my, Carlist" class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:border-slate-900 focus:outline-none">
                 </div>
             </div>
 
-            <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-xs">
-                <div class="flex justify-between items-center text-slate-400 border-b border-slate-800 pb-2">
+            <!-- Dynamic Outputs / Manual Overrides -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-mono text-xs">
+                <div class="flex justify-between items-center text-slate-600 border-b border-slate-200 pb-2">
                     <span>Available Market Spread:</span>
-                    <span id="modal-spread-val" class="text-amber-300 font-bold">RM 0</span>
+                    <span id="modal-spread-val" class="text-slate-950 font-bold">RM 0</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 pt-1">
                     <div>
-                        <label class="block text-slate-400 mb-1">Cadangan Komisen (RM):</label>
-                        <input type="number" id="modal-comm-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                        <label class="block text-slate-600 mb-1">Cadangan Komisen (RM):</label>
+                        <input type="number" id="modal-comm-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-slate-400 mb-1">Buffer Tawar (RM):</label>
-                        <input type="number" id="modal-buffer-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                        <label class="block text-slate-600 mb-1">Buffer Tawar (RM):</label>
+                        <input type="number" id="modal-buffer-input" oninput="recalcModalLive()" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-bold focus:border-slate-900 focus:outline-none">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/80">
+                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-200">
                     <div>
-                        <span class="block text-[11px] text-slate-400">Harga Iklan OTR (55% NCD):</span>
-                        <input type="number" id="modal-adv-ncd55-input" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-amber-400 font-bold text-sm mt-1">
+                        <span class="block text-[11px] text-slate-600">Harga Iklan OTR (55% NCD):</span>
+                        <input type="number" id="modal-adv-ncd55-input" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-amber-700 font-bold text-sm mt-1 focus:border-slate-900 focus:outline-none">
                     </div>
                     <div>
-                        <span class="block text-[11px] text-slate-400">Min. Target Closing Price:</span>
-                        <input type="number" id="modal-min-sell-input" class="w-full p-2 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 font-bold text-sm mt-1">
+                        <span class="block text-[11px] text-slate-600">Min. Target Closing Price:</span>
+                        <input type="number" id="modal-min-sell-input" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-emerald-700 font-bold text-sm mt-1 focus:border-slate-900 focus:outline-none">
                     </div>
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs text-slate-400 mb-1">Nota Pasaran / Catatan Khas:</label>
-                <textarea id="modal-notes" rows="2" placeholder="Cth: Unit spec tinggi, permintaan peminat kukuh, tiada tandingan harga." class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white"></textarea>
+                <label class="block text-xs text-slate-600 mb-1">Nota Pasaran / Catatan Khas:</label>
+                <textarea id="modal-notes" rows="2" placeholder="Cth: Unit spec tinggi, permintaan peminat kukuh, tiada tandingan harga." class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 focus:border-slate-900 focus:outline-none"></textarea>
             </div>
 
-            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
-                <button onclick="resetModalToAuto()" type="button" class="text-xs text-slate-400 hover:text-white underline">Reset ke Pengiraan Auto</button>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+                <button onclick="resetModalToAuto()" type="button" class="text-xs text-slate-500 hover:text-slate-900 underline">Reset ke Pengiraan Auto</button>
                 <div class="flex gap-2">
-                    <button onclick="closeEditModal()" type="button" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">Batal</button>
-                    <button onclick="saveModalChanges()" type="button" class="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-lg">Simpan Risikan</button>
+                    <button onclick="closeEditModal()" type="button" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs">Batal</button>
+                    <button onclick="saveModalChanges()" type="button" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider shadow-md">Simpan Risikan</button>
                 </div>
             </div>
         </div>
