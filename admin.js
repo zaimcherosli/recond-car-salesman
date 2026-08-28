@@ -2,29 +2,49 @@ let currentCars = [];
 let globalSettings = {};
 let currentTab = 'top-ads';
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAdmin);
+} else {
     initAdmin();
-});
+}
 
 async function initAdmin() {
-    try {
-        const res = await fetch('admin_inventory.json');
-        if (!res.ok) throw new Error('admin_inventory.json not found');
-        currentCars = await res.json();
-    } catch (e) {
-        console.warn('Could not load admin_inventory.json directly, falling back to cars_data.json:', e);
+    const candidateUrls = [
+        'admin_inventory.json',
+        './admin_inventory.json',
+        '/admin_inventory.json',
+        'cars_data.json',
+        './cars_data.json',
+        '/cars_data.json'
+    ];
+
+    for (const url of candidateUrls) {
         try {
-            const res2 = await fetch('cars_data.json');
-            currentCars = await res2.json();
-        } catch (err) {
-            console.error('Failed to load any inventory data', err);
-        }
+            const res = await fetch(url);
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    currentCars = data;
+                    break;
+                }
+            }
+        } catch (e) {}
     }
 
-    try {
-        const setRes = await fetch('pricing_settings.json');
-        if (setRes.ok) globalSettings = await setRes.json();
-    } catch(e){}
+    if (currentCars.length === 0 && window.INVENTORY_DATA && Array.isArray(window.INVENTORY_DATA)) {
+        currentCars = window.INVENTORY_DATA;
+    }
+
+    const settingUrls = ['pricing_settings.json', './pricing_settings.json', '/pricing_settings.json'];
+    for (const sUrl of settingUrls) {
+        try {
+            const setRes = await fetch(sUrl);
+            if (setRes.ok) {
+                globalSettings = await setRes.json();
+                break;
+            }
+        } catch(e){}
+    }
 
     const savedSettings = localStorage.getItem('prestige_pricing_settings');
     if (savedSettings) {
