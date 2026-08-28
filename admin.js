@@ -113,7 +113,7 @@ function renderTopAds() {
     if (!grid) return;
 
     const brand = document.getElementById('top-ads-brand-filter')?.value || 'all';
-    let list = currentCars.filter(c => (c.ad_score || 0) >= 7.0 && (c.market_median || 0) > 0);
+    let list = currentCars.filter(c => (c.ad_score || 0) >= 7.0 && (c.market_median || 0) > 0 && (c.image_count >= 2 || (c.images && c.images.length >= 2)));
     if (brand !== 'all') {
         list = list.filter(c => c.brand && c.brand.toLowerCase() === brand.toLowerCase());
     }

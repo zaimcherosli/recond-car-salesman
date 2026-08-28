@@ -63,22 +63,6 @@
       "is_override": false
     }
   },
-  "BMZ_191_LA650S-0264019": {
-    "stock_no": "BMZ 191",
-    "chassis": "LA650S-0264019",
-    "model": "DAIHATSU TANTO FUN CROSS TURBO",
-    "market_low": 100000,
-    "market_median": 105000,
-    "market_high": 109000,
-    "market_sample_size": 5,
-    "market_checked_at": "2026-08-26",
-    "market_sources": "Mudah.my",
-    "market_notes": "Fun Cross Turbo unit comel & jimat minyak.",
-    "demand_score": 8.5,
-    "manual_overrides": {
-      "is_override": false
-    }
-  },
   "EW_517_ZFF97CMC000293344": {
     "stock_no": "EW 517",
     "chassis": "ZFF97CMC000293344",
@@ -155,22 +139,6 @@
     "market_sources": "Mudah.my, Facebook Type R Club, Carlist",
     "market_notes": "Model panas pasaran Malaysia. Nilai susut minima.",
     "demand_score": 9.2,
-    "manual_overrides": {
-      "is_override": false
-    }
-  },
-  "SA_2155_FL1-1002231": {
-    "stock_no": "SA 2155",
-    "chassis": "FL1-1002231",
-    "model": "HONDA CIVIC EX (FL1)",
-    "market_low": 142000,
-    "market_median": 148000,
-    "market_high": 154000,
-    "market_sample_size": 4,
-    "market_checked_at": "2026-08-26",
-    "market_sources": "Carlist",
-    "market_notes": "Stok standard recond.",
-    "demand_score": 8.5,
     "manual_overrides": {
       "is_override": false
     }
@@ -262,54 +230,6 @@
     "market_low": 159000,
     "market_median": 165000,
     "market_high": 170000,
-    "market_sample_size": 10,
-    "market_checked_at": "2026-08-26",
-    "market_sources": "Carlist, Mudah.my",
-    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
-    "demand_score": 8.5,
-    "manual_overrides": {
-      "is_override": false
-    }
-  },
-  "PSZ_585_RP3-1333523": {
-    "stock_no": "PSZ 585",
-    "chassis": "RP3-1333523",
-    "model": "HONDA STEPWAGON 1.5 SPADA COOL SPIRIT HONDA SENSING (7 SEATER)",
-    "market_low": 160000,
-    "market_median": 166000,
-    "market_high": 171000,
-    "market_sample_size": 10,
-    "market_checked_at": "2026-08-26",
-    "market_sources": "Carlist, Mudah.my",
-    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
-    "demand_score": 8.5,
-    "manual_overrides": {
-      "is_override": false
-    }
-  },
-  "SA_2164_RP6-1113318": {
-    "stock_no": "SA 2164",
-    "chassis": "RP6-1113318",
-    "model": "HONDA STEPWAGON SPADA (7 SEATER)",
-    "market_low": 172000,
-    "market_median": 178000,
-    "market_high": 183000,
-    "market_sample_size": 10,
-    "market_checked_at": "2026-08-26",
-    "market_sources": "Carlist, Mudah.my",
-    "market_notes": "MPV 7-seater pintu waku-waku. Permintaan tinggi.",
-    "demand_score": 8.5,
-    "manual_overrides": {
-      "is_override": false
-    }
-  },
-  "DD_235_RP6-1111802": {
-    "stock_no": "DD 235",
-    "chassis": "RP6-1111802",
-    "model": "HONDA STEPWAGON 1.5 SPADA (7 SEATER)",
-    "market_low": 169000,
-    "market_median": 175000,
-    "market_high": 180000,
     "market_sample_size": 10,
     "market_checked_at": "2026-08-26",
     "market_sources": "Carlist, Mudah.my",

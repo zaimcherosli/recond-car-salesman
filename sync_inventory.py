@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Smarter Inventory & Pricing Sync Pipeline
 - Parses dealer 'CAR PRICELIST.pdf'
@@ -305,8 +305,8 @@ def main():
         # Sanitize for public catalog
         public_data = sanitize_for_public(admin_data)
         
-        # Filter: only publish cars that have photos or were previously published
-        if imgs or car.get("price_rm", 0) > 0:
+        # Filter: only publish cars that have verified photos
+        if imgs and len(imgs) >= 2:
             public_inventory.append(public_data)
             
         if admin_data["pricing_status"] == "UNRESEARCHED":
