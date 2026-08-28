@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://recond-car-salesman.pages.dev/sitemap.xml
