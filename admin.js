@@ -505,8 +505,7 @@ function exportCSV() {
         "MinTargetClosing", "MarketCheckedAt", "MarketFreshness", "IsManualOverride", "Notes"
     ];
 
-    let csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "
-";
+    let csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "\n";
 
     currentCars.forEach(car => {
         const row = [
@@ -530,8 +529,7 @@ function exportCSV() {
             car.is_manual_override ? 'TRUE' : 'FALSE',
             `"${(car.market_notes || '').replace(/"/g, '""')}"`
         ];
-        csvContent += row.join(",") + "
-";
+        csvContent += row.join(",") + "\n";
     });
 
     const encodedUri = encodeURI(csvContent);
