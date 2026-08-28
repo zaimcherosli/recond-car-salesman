@@ -106,7 +106,8 @@
 </head>
 <body class="font-sans antialiased selection:bg-brand-gold selection:text-white overflow-x-hidden w-full">
 
-    <!-- Top Running Text / Marquee Bar (Tulisan Bergerak Sebaris) -->
+    
+    <!-- Top Running Marquee Bar -->
     <div class="bg-slate-950 text-slate-100 text-xs py-2.5 overflow-hidden border-b border-slate-800 w-full max-w-full">
         <div class="marquee-wrapper">
             <div class="marquee-content gap-8 font-medium tracking-wide">
@@ -121,53 +122,63 @@
                 <span class="whitespace-nowrap">Kelulusan Pinjaman Bank Pantas 24 - 48 Jam</span>
                 <span class="text-amber-400 font-bold">•</span>
                 <span class="whitespace-nowrap">Pakej Waranti Komprehensif Sehingga 7 Tahun</span>
-                <span class="text-amber-400 font-bold">•</span>
-                <!-- Duplicated for seamless loop -->
-                <span class="whitespace-nowrap font-bold text-amber-300">CLEARANCE STOK: Bermula 31 Ogos 2026 Sehingga Stok Habis!</span>
-                <span class="text-amber-400 font-bold">•</span>
-                <span class="whitespace-nowrap">Stok Recond Jepun & UK Unregistered Terkini 2026</span>
-                <span class="text-amber-400 font-bold">•</span>
-                <span class="whitespace-nowrap">Laporan Lelongan Tulen Disediakan (Gred 4.5 & 5A)</span>
-                <span class="text-amber-400 font-bold">•</span>
-                <span class="whitespace-nowrap">Talian Terus Sales Advisor: 010-8118 559</span>
-                <span class="text-amber-400 font-bold">•</span>
             </div>
         </div>
     </div>
 
-    <!-- Navigation Header (Header Responsif & Sebaris) -->
+    <!-- Navigation Header -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm w-full">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
             
-            <!-- Brand Logo -->
-            <a href="#" class="flex flex-col min-w-0">
+            <a href="index.html" class="flex flex-col min-w-0">
                 <span class="font-display text-sm sm:text-lg lg:text-xl font-bold tracking-wider text-slate-900 uppercase leading-none truncate">PRESTIGE AUTO RECOND</span>
                 <span class="text-[9px] sm:text-[10px] tracking-widest text-slate-500 uppercase font-semibold mt-1 truncate">Penasihat Jualan Sah & Dipercayai</span>
             </a>
 
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-xs font-bold uppercase tracking-wider text-slate-600">
-                <a href="index.html" class="whitespace-nowrap hover:text-amber-600 transition-colors">Laman Utama</a>
-                <a href="katalog.html" class="whitespace-nowrap px-3 py-1.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-300/80 hover:bg-amber-100 transition-colors flex items-center gap-1.5 font-extrabold shadow-sm">
-                    🚗 Bilik Pameran <span class="px-1.5 py-0.2 rounded-full bg-amber-400 text-slate-950 text-[10px]">20</span>
-                </a>
-                <a href="#kalkulator" class="whitespace-nowrap hover:text-amber-600 transition-colors">Kalkulator</a>
-                <a href="#proses" class="whitespace-nowrap hover:text-amber-600 transition-colors">Proses</a>
-                <a href="#dokumen" class="whitespace-nowrap hover:text-amber-600 transition-colors">Dokumen</a>
-                <a href="#faq" class="whitespace-nowrap hover:text-amber-600 transition-colors">Soalan Lazim</a>
+            <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-bold uppercase tracking-wider text-slate-600">
+                <a href="index.html" class="text-amber-700 font-extrabold transition-colors whitespace-nowrap">Laman Utama</a>
+                
+                <div class="relative group py-2">
+                    <a href="katalog.html" class="hover:text-amber-700 flex items-center gap-1 transition-colors whitespace-nowrap">
+                        <span>Stok</span>
+                        <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+
+                    <div class="absolute left-0 top-full hidden group-hover:block w-72 bg-white rounded-2xl border border-slate-200 shadow-xl p-3 z-50">
+                        <div class="text-[10px] font-bold text-amber-700 uppercase tracking-widest px-3 py-1.5 border-b border-slate-100">Kategori & Model Pilihan</div>
+                        <div class="py-1 space-y-1 text-xs">
+                            <a href="katalog.html?brand=Honda" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">Honda (Civic Type R, N-Box, Stepwagon)</a>
+                            <a href="katalog.html?brand=Bmw" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">BMW (M135i, M4 Competition, 118i)</a>
+                            <a href="katalog.html?brand=Ferrari" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">Ferrari (812 GTS)</a>
+                            <a href="katalog.html?brand=Daihatsu" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">Daihatsu (Tanto Turbo)</a>
+                            <a href="katalog.html?cat=mpv" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">Kategori MPV Keluarga</a>
+                            <a href="katalog.html?cat=performance" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-amber-700 font-semibold transition-colors">Kategori Prestasi & Sukan</a>
+                        </div>
+                        <div class="pt-2 border-t border-slate-100 mt-1">
+                            <a href="katalog.html" class="block px-3 py-2 rounded-xl bg-slate-900 text-white text-center font-bold text-[11px] hover:bg-amber-600 transition-colors">Lihat Semua 20 Stok Kenderaan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="kalkulator.html" class="hover:text-amber-700 transition-colors whitespace-nowrap">Kalkulator</a>
+                <a href="proses.html" class="hover:text-amber-700 transition-colors whitespace-nowrap">Proses</a>
+                <a href="dokumen.html" class="hover:text-amber-700 transition-colors whitespace-nowrap">Dokumen</a>
+                <a href="faq.html" class="hover:text-amber-700 transition-colors whitespace-nowrap">Soalan Lazim</a>
             </nav>
 
-            <!-- Single WhatsApp Action Button -->
-            <div class="flex items-center flex-shrink-0">
-                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20nak%20tanya%20tentang%20stok%20kereta%20recond." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-3 sm:px-4 py-2 rounded-lg bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm whitespace-nowrap">
-                    WhatsApp <span class="hidden sm:inline">: 010-8118 559</span>
+            <div class="flex items-center gap-2">
+                <a href="katalog.html" class="hidden sm:inline-flex lg:hidden px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold uppercase tracking-wider">
+                    Stok
+                </a>
+                <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20berminat%20nak%20tanya%20tentang%20stok%20kereta%20recond." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm whitespace-nowrap">
+                    WhatsApp: 010-8118 559
                 </a>
             </div>
 
         </div>
     </header>
-
-    <!-- Hero Section (Clean Bright White Luxury) -->
+    
+<!-- Hero Section (Clean Bright White Luxury) -->
     <section class="relative pt-8 pb-12 sm:pt-14 sm:pb-20 bg-gradient-to-b from-slate-50 via-white to-white overflow-hidden border-b border-slate-200 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -204,18 +215,17 @@
 
                     <!-- Hero Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                        <a href="katalog.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center hover:scale-105">
-                            🚗 Buka Bilik Pameran (20 Stok) ➔
+                        <a href="katalog.html" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center">
+                            Buka Bilik Pameran (20 Stok) ➔
                         </a>
-                        <a href="#kalkulator" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider transition-all text-center">
-                            🧮 Kira Loan
+                        <a href="kalkulator.html" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider transition-all text-center">
+                            Kira Anggaran Pinjaman
                         </a>
                         <a href="https://wa.me/60108118559?text=Salam%20Sales%20Advisor,%20saya%20ingin%20semak%20senarai%20stok%20terkini%20dan%20kelayakan%20loan." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3.5 rounded-xl bg-brand-emerald hover:bg-brand-emeraldHover text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center">
-                            WhatsApp
+                            Hubungi WhatsApp
                         </a>
                     </div>
                 </div>
-
                 <!-- Right Side Card: Sales Advisor Card -->
                 <div class="lg:col-span-5 w-full">
                     <div class="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200 shadow-lg relative w-full">
